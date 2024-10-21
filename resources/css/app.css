@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .batas {
+    @apply border-dashed border-2 border-red-500;
+  }
+}
