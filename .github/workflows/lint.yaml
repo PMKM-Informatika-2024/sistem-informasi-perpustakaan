@@ -7,7 +7,6 @@ jobs:
   lint:
     name: Fix Code Style
     runs-on: ubuntu-latest
-    environment: Production
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
