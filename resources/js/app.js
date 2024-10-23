@@ -1,1 +1,1 @@
-console.log("cihuyy");
+import "flowbite";
