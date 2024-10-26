@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::if("role", function (string $value) {
+            return Str::of($value)->explode("|")->contains(function (string $value) {
+                return Auth::user()->role->name === $value;
+            });
+        });
+
+        Carbon::setLocale("id_ID");
     }
 }
