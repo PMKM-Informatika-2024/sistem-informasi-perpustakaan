@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -24,5 +27,14 @@ Route::middleware('auth')->group(function () {
         ]);
     });
 
+    Route::prefix("/dashboard")->group(function () {
+        Route::get("/manage-users", [UserController::class, "index"])->name("manage user");
+    });
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+Route::middleware("admin")->group(function () {
+    Route::post("/dashboard/add-member", [UserController::class, "addMember"])->name("add member");
+    Route::delete("/dashboard/delete-all-member", [UserController::class, "deleteAllMember"])->name("delete all member");
 });
