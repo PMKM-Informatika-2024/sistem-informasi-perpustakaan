@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,20 +20,36 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function scopeIsAdmin(): bool
+    public function scopeWithPaginate(Builder $query, int $perPage = 6)
     {
-        return $this->role->name === 'admin';
+        /**
+         * @var \Illuminate\Pagination\LengthAwarePaginator $result
+         */
+        $result = $query->paginate($perPage);
+
+        return $result->onEachSide(1)->withQueryString();
     }
 
-    public function scopeIsWorker(): bool
+    public function scopeExceptAdmin(Builder $query)
     {
-        return $this->role->name === 'worker';
+        $query->whereRelation('role', 'name', '!=', 'admin');
+    }
+
+    public function scopeRoleIs(Builder $query, string $role)
+    {
+        $query->whereRelation('role', 'name', $role);
+    }
+
+    public function scopeNameLike(Builder $query, string $name)
+    {
+        $query->where('name', 'LIKE', "%{$name}%");
     }
 
     protected function casts(): array
     {
         return [
             'password' => 'hashed',
+            "created_at" => "datetime"
         ];
     }
 }

@@ -12,21 +12,21 @@ class UsersTable extends Component
 {
     use WithPagination;
 
-    #[Url(as: "search", history: true)]
+    #[Url(as: "search")]
     public string $keyword = '';
 
     private function search(string $keyword)
     {
-        return User::where("name", "LIKE", "%{$keyword}%")->whereRelation("role", "name", "!=", "admin")->paginate(6)->onEachSide(1)->withQueryString();
+        return User::exceptAdmin()->nameLike($keyword)->withPaginate();
     }
 
     private function allExceptAdmin()
     {
         if (request()->has("role")) {
-            return User::whereRelation("role", "name", "!=", "admin")->whereRelation("role", "name", request("role"))->paginate(6)->onEachSide(1)->withQueryString();
+            return User::exceptAdmin()->roleIs(request("role"))->withPaginate();
         }
 
-        return User::whereRelation("role", "name", "!=", "admin")->paginate(6)->onEachSide(1)->withQueryString();
+        return User::exceptAdmin()->withPaginate();
     }
 
     public function render()
