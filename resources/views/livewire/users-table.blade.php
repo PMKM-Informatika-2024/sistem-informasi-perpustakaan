@@ -1,6 +1,6 @@
 <div class="mt-3 max-w-screen-2xl">
   <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-    <div class="flex flex-col space-y-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0">
+    <div class="flex flex-col space-y-3 p-4 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0">
       <div class="w-full md:w-1/2">
         <div class="flex items-center">
           <label for="simple-search" class="sr-only">Search</label>
@@ -39,13 +39,12 @@
           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="mr-2 h-4 w-4 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
           </svg>
-          Filter
+          <span>Filter</span>
           <svg class="-mr-1 ml-1.5 h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
           </svg>
         </button>
-        <form action="" id="filterDropdown" class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-gray-700">
-          <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Role</h6>
+        <form id="filterDropdown" class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-gray-700">
           <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
             @foreach ($roles as $role)
               <li class="flex items-center">
@@ -114,7 +113,7 @@
                 <td class="flex items-center justify-end px-4 py-3">
                   <button id="{{ $user->id }}-button" data-dropdown-toggle="{{ $user->id }}" data-dropdown-placement="right-start"
                     class="inline-flex items-center rounded-lg p-0.5 text-center text-sm font-medium text-gray-500 hover:text-gray-800 focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                    <svg class="h-5 w-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="size-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                       <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                     </svg>
                   </button>
@@ -124,11 +123,27 @@
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                       </li>
                       <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Naikkan Jabatan</a>
+                        @if ($user->role->name == 'karyawan')
+                          <form action="{{ route('demote user', ['id' => $user->id]) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="block w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Turun Jabatan</button>
+                          </form>
+                        @else
+                          <form action="{{ route('promote user', ['id' => $user->id]) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="block w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Naik Jabatan</button>
+                          </form>
+                        @endif
                       </li>
                     </ul>
                     <div class="py-1">
-                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+                      <form action="{{ route('delete user', ['id' => $user->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="block w-full px-4 py-2 text-left text-sm font-medium text-red-700 hover:bg-red-100 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white">Hapus User</button>
+                      </form>
                     </div>
                   </div>
                 </td>

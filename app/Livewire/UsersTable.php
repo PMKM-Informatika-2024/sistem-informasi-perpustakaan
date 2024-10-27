@@ -13,7 +13,7 @@ class UsersTable extends Component
     use WithPagination;
 
     #[Url(as: "search", history: true)]
-    public $keyword = '';
+    public string $keyword = '';
 
     private function search(string $keyword)
     {
