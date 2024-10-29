@@ -23,10 +23,10 @@ class UsersTable extends Component
     private function allExceptAdmin()
     {
         if (request()->has("role")) {
-            return User::exceptAdmin()->roleIs(request("role"))->withPaginate();
+            return User::exceptAdmin()->roleIs(request("role"))->latest()->withPaginate();
         }
 
-        return User::exceptAdmin()->withPaginate();
+        return User::exceptAdmin()->latest()->withPaginate();
     }
 
     public function render()
