@@ -35,6 +35,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware("admin")->group(function () {
-    Route::post("/dashboard/add-member", [UserController::class, "addMember"])->name("add member");
-    Route::delete("/dashboard/delete-all-member", [UserController::class, "deleteAllMember"])->name("delete all member");
+    Route::prefix("/dashboard/user")->group(function () {
+        Route::patch("/promote/{id}", [UserController::class, "promote"])->name("promote user");
+        Route::patch("/demote/{id}", [UserController::class, "demote"])->name("demote user");
+
+        Route::delete("/delete-all", [UserController::class, "deleteAll"])->name("delete all user");
+    });
 });
