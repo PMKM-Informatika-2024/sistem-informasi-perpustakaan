@@ -6,7 +6,7 @@
           <label for="simple-search" class="sr-only">Search</label>
           <div class="relative w-full">
             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg aria-hidden="true" class="h-5 w-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <svg aria-hidden="true" class="size-4 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
               </svg>
             </div>
@@ -19,28 +19,28 @@
       <div class="flex flex-shrink-0 flex-col space-y-3 md:flex-row md:items-center md:space-x-3 md:space-y-0">
         <button type="button" data-modal-target="add-modal" data-modal-toggle="add-modal"
           class="flex items-center justify-center rounded-lg bg-primary-700 px-4 py-2 text-sm font-medium text-white hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700">
-          <svg class="mr-2 h-3.5 w-3.5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg class="size-4 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
           </svg>
           Tambah Data
         </button>
         <button type="button" data-modal-target="delete-all-modal" data-modal-toggle="delete-all-modal"
           class="flex items-center justify-center rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700">
-          <svg class="size-3.5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
               d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
               clip-rule="evenodd" />
           </svg>
           Hapus Semua Data
         </button>
-        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
+        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" data-dropdown-placement="bottom-end"
           class="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:w-auto"
           type="button">
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="mr-2 h-4 w-4 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="size-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
           </svg>
           <span>Filter</span>
-          <svg class="-mr-1 ml-1.5 h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg class="size-4 -mr-1 ml-1.5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
           </svg>
         </button>
@@ -93,7 +93,7 @@
           </thead>
           <tbody>
             @foreach ($users as $user)
-              <tr class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
+              <tr wire:key="{{ $user->name }}" class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
                 <td class="px-4 py-2">
                   @if ($user->role->name == 'karyawan')
                     <span class="me-2 rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-300">{{ Str::ucfirst($user->role->name) }}</span>
@@ -111,41 +111,45 @@
                 <td class="px-4 py-3">{{ $user->address }}</td>
                 <td class="px-4 py-3">{{ $user->created_at->translatedFormat('j F Y') }}</td>
                 <td class="flex items-center justify-end px-4 py-3">
-                  <button id="{{ $user->id }}-button" data-dropdown-toggle="{{ $user->id }}" data-dropdown-placement="right-start"
-                    class="inline-flex items-center rounded-lg p-0.5 text-center text-sm font-medium text-gray-500 hover:text-gray-800 focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                    <svg class="size-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                  <button type="button" class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd"
+                        d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
+                        clip-rule="evenodd" />
+                      <path fill-rule="evenodd"
+                        d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
+                        clip-rule="evenodd" />
                     </svg>
+                    <span class="sr-only">Edit</span>
                   </button>
-                  <div id="{{ $user->id }}" class="z-10 hidden w-44 divide-y divide-gray-100 rounded bg-white shadow dark:divide-gray-600 dark:bg-gray-700">
-                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="{{ $user->id }}-button">
-                      <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                      </li>
-                      <li>
-                        @if ($user->role->name == 'karyawan')
-                          <form action="{{ route('demote user', ['id' => $user->id]) }}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="block w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Turun Jabatan</button>
-                          </form>
-                        @else
-                          <form action="{{ route('promote user', ['id' => $user->id]) }}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="block w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Naik Jabatan</button>
-                          </form>
-                        @endif
-                      </li>
-                    </ul>
-                    <div class="py-1">
-                      <form action="{{ route('delete user', ['id' => $user->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="block w-full px-4 py-2 text-left text-sm font-medium text-red-700 hover:bg-red-100 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white">Hapus User</button>
-                      </form>
+                  @if ($user->role->name === 'karyawan')
+                    <div>
+                      <button type="button" x-on:click="$dispatch('demote', { name: '{{ $user->name }}' })"
+                        class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 7 4 4 4-4m-8 6 4 4 4-4" />
+                        </svg>
+                        <span class="sr-only">Demote</span>
+                      </button>
                     </div>
-                  </div>
+                  @else
+                    <button x-on:click="$dispatch('promote', { name: '{{ $user->name }}' })" type="button"
+                      class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 17-4-4-4 4m8-6-4-4-4 4" />
+                      </svg>
+                      <span class="sr-only">Promote</span>
+                    </button>
+                  @endif
+                  <button x-on:click="$dispatch('delete', { name: '{{ $user->name }}' })" type="button"
+                    class="me-2 inline-flex items-center rounded-full bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd"
+                        d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
+                        clip-rule="evenodd" />
+                    </svg>
+                    <span class="sr-only">Icon description</span>
+                  </button>
                 </td>
               </tr>
             @endforeach
