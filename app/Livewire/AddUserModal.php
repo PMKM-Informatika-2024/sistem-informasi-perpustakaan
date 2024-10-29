@@ -2,32 +2,24 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\AddUserForm;
 use App\Models\Role;
+use App\Services\UserService;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
-use Livewire\Attributes\Validate;
 
 class AddUserModal extends Component
 {
-    #[Validate(rule: 'required', message: 'Nama harus diisi')]
-    public string $name;
-
-    #[Validate(rule: 'required|email:dns|unique:users,email')]
-    public string $email;
-
-    #[Validate(rule: 'required|numeric')]
-    public string $phone_number;
-
-    #[Validate(rule: 'required|string|max:255')]
-    public string $address;
-
-    #[Validate(rule: 'required|exists:roles,id')]
-    public string $role_id = '';
+    public AddUserForm $form;
 
     public function save()
     {
         $data = $this->validate();
 
-        dd($data);
+        UserService::store($data);
+        Session::flash('success', 'User berhasil ditambahkan');
+
+        return $this->redirectRoute("manage user");
     }
 
     public function render()

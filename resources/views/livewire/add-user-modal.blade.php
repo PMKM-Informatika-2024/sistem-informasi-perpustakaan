@@ -16,36 +16,45 @@
       <div class="space-y-4">
         <div>
           <label for="name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
-          <input type="text" wire:model="name" id="name"
+          <input type="text" wire:model="form.name" id="name"
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
             placeholder="Udin Petot" required>
+          @error('form.name')
+            <span class="text-sm text-red-400">{{ $message }}</span>
+          @enderror
         </div>
         <div class="flex gap-4">
           <div>
             <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Email</label>
-            <input type="email" wire:model="email" id="email"
+            <input type="email" wire:model="form.email" id="email"
               class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
               placeholder="udinpetot@gmail.com" required>
-            @error('email')
+            @error('form.email')
               <span class="text-sm text-red-400">{{ $message }}</span>
             @enderror
           </div>
           <div>
             <label for="phone_number" class="mb-2 block appearance-none text-sm font-medium text-gray-900 dark:text-white">No. HP</label>
-            <input type="number" wire:model="phone_number" id="phone_number"
+            <input type="number" wire:model="form.phone_number" id="phone_number"
               class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
               placeholder="081212121212" required>
+            @error('form.phone_number')
+              <span class="text-sm text-red-400">{{ $message }}</span>
+            @enderror
           </div>
         </div>
         <div>
           <label for="address" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-          <input type="text" wire:model="address" id="address"
+          <input type="text" wire:model="form.address" id="address"
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
             placeholder="Jl. Pak Benceng" required>
+          @error('form.address')
+            <span class="text-sm text-red-400">{{ $message }}</span>
+          @enderror
         </div>
         <div>
           <label for="role" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Role</label>
-          <select id="role" wire:model="role_id"
+          <select id="role" wire:model="form.role_id"
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500 dark:disabled:bg-gray-600 dark:disabled:text-gray-400">
             <option selected disabled value="">Pilih Role</option>
             @foreach ($roles as $role)
