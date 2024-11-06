@@ -19,6 +19,7 @@ class AddUserModal extends Component
         UserService::store($data);
         Session::flash('success', 'User berhasil ditambahkan');
 
+        $this->dispatch("close-modal");
         return $this->redirectRoute("manage user");
     }
 
