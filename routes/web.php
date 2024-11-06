@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Response;
