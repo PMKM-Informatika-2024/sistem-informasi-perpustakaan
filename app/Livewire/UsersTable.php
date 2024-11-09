@@ -2,18 +2,17 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\WithPagination;
-use Livewire\Attributes\Url;
-use Livewire\Attributes\On;
 use App\Models\Role;
 use App\Models\User;
+use Livewire\Component;
+use Livewire\Attributes\Url;
+use Livewire\WithPagination;
 
 class UsersTable extends Component
 {
     use WithPagination;
 
-    #[Url(as: "search")]
+    #[Url(as: 'search')]
     public string $keyword = '';
 
     private function search(string $keyword)
@@ -23,8 +22,8 @@ class UsersTable extends Component
 
     private function allExceptAdmin()
     {
-        if (request()->has("role")) {
-            return User::exceptAdmin()->roleIs(request("role"))->latest()->withPaginate();
+        if (request()->has('role')) {
+            return User::exceptAdmin()->roleIs(request('role'))->latest()->withPaginate();
         }
 
         return User::exceptAdmin()->latest()->withPaginate();
@@ -33,10 +32,10 @@ class UsersTable extends Component
     public function render()
     {
         return view('livewire.users-table')->with([
-            "roles" => Role::all()->reject(function ($role) {
-                return $role->name === "admin";
+            'roles' => Role::all()->reject(function ($role) {
+                return $role->name === 'admin';
             }),
-            "users" => $this->keyword === '' ? $this->allExceptAdmin() : $this->search($this->keyword),
+            'users' => $this->keyword === '' ? $this->allExceptAdmin() : $this->search($this->keyword),
         ]);
     }
 

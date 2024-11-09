@@ -19,7 +19,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email:dns|unique:users,email',
             'phone_number' => 'required|numeric|unique:users,phone_number',
-            "address" => "required",
+            'address' => 'required',
             'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
         ];
     }

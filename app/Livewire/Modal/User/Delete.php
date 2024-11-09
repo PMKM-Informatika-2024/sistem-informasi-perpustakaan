@@ -3,9 +3,8 @@
 namespace App\Livewire\Modal\User;
 
 use App\Models\User;
-use App\Services\UserService;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use App\Services\UserService;
 
 class Delete extends Component
 {
@@ -14,8 +13,9 @@ class Delete extends Component
         $user = User::where('name', $name)->firstOrFail();
         UserService::delete($user);
 
-        $this->dispatch("close-modal");
-        return $this->redirectRoute("manage user");
+        $this->dispatch('close-modal');
+
+        return $this->redirectRoute('manage user');
     }
 
     public function render()

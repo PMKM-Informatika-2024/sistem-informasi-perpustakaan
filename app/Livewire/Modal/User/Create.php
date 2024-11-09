@@ -2,12 +2,10 @@
 
 namespace App\Livewire\Modal\User;
 
-use Livewire\Component;
 use App\Models\Role;
+use Livewire\Component;
 use App\Services\UserService;
-use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
 
 class Create extends Component
 {
@@ -41,14 +39,15 @@ class Create extends Component
 
         UserService::create($this->all());
 
-        $this->dispatch("close-modal");
-        return $this->redirectRoute("manage user");
+        $this->dispatch('close-modal');
+
+        return $this->redirectRoute('manage user');
     }
 
     public function render()
     {
         return view('livewire.modal.user.create')->with([
-            "roles" => Role::all()->reject(fn(Role $role) => $role->name === 'admin')
+            'roles' => Role::all()->reject(fn (Role $role) => $role->name === 'admin'),
         ]);
     }
 }
