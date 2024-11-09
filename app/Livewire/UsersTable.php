@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
+use Livewire\Attributes\On;
 use App\Models\Role;
 use App\Models\User;
 
