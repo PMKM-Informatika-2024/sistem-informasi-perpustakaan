@@ -10,7 +10,7 @@ class Admin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->user()->role->name === 'admin') {
+        if ($request->user()->role->name !== 'admin') {
             abort(403);
         }
 

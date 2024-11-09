@@ -15,7 +15,7 @@ class Karyawan
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user()->role->name === 'karyawan') {
+        if ($request->user()->role->name !== 'karyawan') {
             abort(403);
         }
 
