@@ -2,15 +2,13 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class AddMemberRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return ! Auth::check();
+        return $this->user()->can('add member');
     }
 
     public function rules(): array
@@ -18,9 +16,9 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email:dns|unique:users,email',
-            'phone_number' => 'required|numeric|unique:users,phone_number',
+            'phone_number' => 'required|numeric',
             'address' => 'required',
-            'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
+            'role_id' => 'required|exists:roles,id',
         ];
     }
 }

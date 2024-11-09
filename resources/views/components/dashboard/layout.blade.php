@@ -5,9 +5,9 @@
     <div>
       <x-partial.sidebar />
     </div>
-    <div class="flex-1">
+    <div class="max-h-dvh flex-1 overflow-y-scroll">
       <x-partial.navbar />
-      <div class="p-4">
+      <div class="px-6 py-4">
         {{ $slot }}
       </div>
     </div>
