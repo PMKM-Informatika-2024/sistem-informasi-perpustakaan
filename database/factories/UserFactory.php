@@ -16,7 +16,7 @@ class UserFactory extends Factory
             "role_id" => fake()->randomElement([2, 3]),
             "name" => fake()->name(),
             "email" => fake()->unique()->freeEmail(),
-            "phone_number" => fake()->phoneNumber(),
+            "phone_number" => fake()->unique()->e164PhoneNumber(),
             "address" => fake()->address(),
             "password" => Hash::make(config("env.secret")),
         ];
