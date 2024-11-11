@@ -20,7 +20,7 @@
     {{-- Delete Specific User Modal --}}
     {{-- Delete All User Modal --}}
     <x-modal name="delete all">
-      <x-modal.user.delete-all />
+      <livewire:modal.user.delete-all />
     </x-modal>
     {{-- Delete All User Modal --}}
     <x-modal name="role">
