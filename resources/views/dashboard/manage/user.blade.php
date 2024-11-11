@@ -4,28 +4,28 @@
   {{-- Modal --}}
   <div>
     {{-- Add User Modal --}}
-    <x-partial.modal name="create">
+    <x-modal name="create">
       <livewire:modal.user.create />
-    </x-partial.modal>
+    </x-modal>
     {{-- Add User Modal --}}
     {{-- Update User Modal --}}
-    <x-partial.modal name="update">
+    <x-modal name="update">
       <livewire:modal.user.update />
-    </x-partial.modal>
+    </x-modal>
     {{-- Update User Modal --}}
     {{-- Delete Specific User Modal --}}
-    <x-partial.modal name="delete specific">
+    <x-modal name="delete specific">
       <livewire:modal.user.delete />
-    </x-partial.modal>
+    </x-modal>
     {{-- Delete Specific User Modal --}}
     {{-- Delete All User Modal --}}
-    <x-partial.modal name="delete all">
+    <x-modal name="delete all">
       <x-modal.user.delete-all />
-    </x-partial.modal>
+    </x-modal>
     {{-- Delete All User Modal --}}
-    <x-partial.modal name="role">
+    <x-modal name="role">
       <livewire:modal.user.role />
-    </x-partial.modal>
+    </x-modal>
   </div>
   {{-- Modal --}}
   {{-- Toast --}}
