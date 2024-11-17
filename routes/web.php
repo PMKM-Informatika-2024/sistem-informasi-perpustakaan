@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return Response::redirectTo('/login');
@@ -25,18 +26,22 @@ Route::middleware('auth')->group(function () {
         ]);
     });
 
+    // Route::get("/dashboard/profile")
+
     Route::prefix('/dashboard')->group(function () {
-        Route::get('/manage-users', [UserController::class, 'index'])->name('manage user');
+        Route::middleware("admin")->group(function () {
+            Route::prefix("/users")->group(function () {
+                Route::get('/', [UserController::class, 'index'])->name('manage user');
+                Route::delete('/delete-all', [UserController::class, 'deleteAll'])->name('delete all user');
+            });
+        });
+
+        Route::middleware("karyawan")->group(function () {
+            Route::prefix("/books")->group(function () {
+                Route::get("/categories", [CategoryController::class, 'index'])->name('manage categories');
+            });
+        });
     });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-});
-
-Route::middleware('admin')->group(function () {
-    Route::prefix('/dashboard/user')->group(function () {
-        Route::patch('/promote/{id}', [UserController::class, 'promote'])->name('promote user');
-        Route::patch('/demote/{id}', [UserController::class, 'demote'])->name('demote user');
-
-        Route::delete('/delete-all', [UserController::class, 'deleteAll'])->name('delete all user');
-    });
 });
