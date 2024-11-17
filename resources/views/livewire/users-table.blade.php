@@ -112,7 +112,7 @@
                 <td class="px-4 py-3">{{ $user->address }}</td>
                 <td class="px-4 py-3">{{ $user->created_at->translatedFormat('j F Y') }}</td>
                 <td class="flex items-center justify-end px-4 py-3">
-                  <button x-on:click="$dispatch('open-modal', { modal: 'update', data: {{ $user }} })" type="button"
+                  <button x-on:click="$dispatch('set-id', { id: {{ $user->id }} })" type="button"
                     class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"
