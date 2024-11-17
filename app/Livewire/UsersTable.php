@@ -15,20 +15,6 @@ class UsersTable extends Component
     #[Url(as: 'search')]
     public string $keyword = '';
 
-    private function search(string $keyword)
-    {
-        return User::exceptAdmin()->nameLike($keyword)->withPaginate();
-    }
-
-    private function allExceptAdmin()
-    {
-        if (request()->has('role')) {
-            return User::exceptAdmin()->roleIs(request('role'))->latest()->withPaginate();
-        }
-
-        return User::exceptAdmin()->latest()->withPaginate();
-    }
-
     public function render()
     {
         return view('livewire.users-table')->with([
@@ -42,5 +28,19 @@ class UsersTable extends Component
     public function paginationView()
     {
         return 'vendor.pagination.tailwind';
+    }
+
+    private function search(string $keyword)
+    {
+        return User::excludeAdmin()->where('name', 'LIKE', "%{$keyword}%")->latest()->withPaginate();
+    }
+
+    private function allExceptAdmin()
+    {
+        if (request()->has('role')) {
+            return User::excludeAdmin()->role(request('role'))->latest()->withPaginate();
+        }
+
+        return User::excludeAdmin()->latest()->withPaginate();
     }
 }

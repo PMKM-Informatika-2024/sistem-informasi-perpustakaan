@@ -22,6 +22,24 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+            'created_at' => 'datetime',
+        ];
+    }
+
+    public function scopeExcludeAdmin(Builder $query)
+    {
+        $query->whereRelation('role', 'name', '!=', 'admin');
+    }
+
+    public function scopeRole(Builder $query, string $role)
+    {
+        $query->whereRelation('role', 'name', $role);
+    }
+
     public function scopeWithPaginate(Builder $query, int $perPage = 6)
     {
         /**
@@ -30,28 +48,5 @@ class User extends Authenticatable
         $result = $query->paginate($perPage);
 
         return $result->onEachSide(1)->withQueryString();
-    }
-
-    public function scopeExceptAdmin(Builder $query)
-    {
-        $query->whereRelation('role', 'name', '!=', 'admin');
-    }
-
-    public function scopeRoleIs(Builder $query, string $role)
-    {
-        $query->whereRelation('role', 'name', $role);
-    }
-
-    public function scopeNameLike(Builder $query, string $name)
-    {
-        $query->where('name', 'LIKE', "%{$name}%");
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'password' => 'hashed',
-            'created_at' => 'datetime',
-        ];
     }
 }
