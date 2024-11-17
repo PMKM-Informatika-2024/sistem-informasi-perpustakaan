@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
     return Response::redirectTo('/login');
@@ -29,16 +29,16 @@ Route::middleware('auth')->group(function () {
     // Route::get("/dashboard/profile")
 
     Route::prefix('/dashboard')->group(function () {
-        Route::middleware("admin")->group(function () {
-            Route::prefix("/users")->group(function () {
+        Route::middleware('admin')->group(function () {
+            Route::prefix('/users')->group(function () {
                 Route::get('/', [UserController::class, 'index'])->name('manage user');
                 Route::delete('/delete-all', [UserController::class, 'deleteAll'])->name('delete all user');
             });
         });
 
-        Route::middleware("karyawan")->group(function () {
-            Route::prefix("/books")->group(function () {
-                Route::get("/categories", [CategoryController::class, 'index'])->name('manage categories');
+        Route::middleware('karyawan')->group(function () {
+            Route::prefix('/books')->group(function () {
+                Route::get('/categories', [CategoryController::class, 'index'])->name('manage categories');
             });
         });
     });

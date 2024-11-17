@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Modal\Category;
 
+use Livewire\Component;
 use App\Models\Category;
 use App\Services\CategoryService;
-use Livewire\Component;
 
 class Delete extends Component
 {
@@ -15,6 +15,7 @@ class Delete extends Component
         CategoryService::delete($category);
 
         $this->dispatch('close-modal');
+
         return $this->redirectRoute('manage categories');
     }
 

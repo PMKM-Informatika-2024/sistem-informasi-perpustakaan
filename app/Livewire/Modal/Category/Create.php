@@ -2,9 +2,8 @@
 
 namespace App\Livewire\Modal\Category;
 
-use App\Models\Category;
-use App\Services\CategoryService;
 use Livewire\Component;
+use App\Services\CategoryService;
 use Livewire\Attributes\Validate;
 
 class Create extends Component
@@ -25,6 +24,7 @@ class Create extends Component
         CategoryService::create($this->all());
 
         $this->dispatch('close-modal');
+
         return $this->redirectRoute('manage categories');
     }
 

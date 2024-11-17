@@ -4,10 +4,10 @@ namespace App\Livewire\Modal\Category;
 
 use Livewire\Component;
 use App\Models\Category;
-use App\Services\CategoryService;
-use Livewire\Attributes\Validate;
 use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
+use App\Services\CategoryService;
+use Livewire\Attributes\Validate;
 
 class Update extends Component
 {
@@ -37,14 +37,15 @@ class Update extends Component
         CategoryService::update($this->category, $this->all());
 
         $this->dispatch('close-modal');
+
         return $this->redirectRoute('manage categories');
     }
 
     public function rules()
     {
         return [
-            "name" => Rule::when(fn() => $this->category->name !== $this->name, 'required|unique:categories,name|max:255'),
-            "description" => 'required|max:255',
+            'name' => Rule::when(fn () => $this->category->name !== $this->name, 'required|unique:categories,name|max:255'),
+            'description' => 'required|max:255',
         ];
     }
 
