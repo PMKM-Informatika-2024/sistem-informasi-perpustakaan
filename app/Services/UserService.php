@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -13,33 +14,16 @@ class UserService
         Session::flash('success', $message);
     }
 
-    public static function create(array $data)
-    {
-        User::create([
-            ...$data,
-            'password' => Hash::make(config('env.secret')),
-        ]);
-
-        self::flash('User berhasil ditambahkan');
-    }
-
-    public static function update(User $user, array $data)
-    {
-        $user->update($data);
-
-        self::flash('User berhasil diperbarui');
-    }
-
     public static function promote(User $user)
     {
-        $user->update(['role_id' => 2]);
+        $user->update(['role_id' => Role::where('name', 'karyawan')->pluck('id')]);
 
         self::flash('User berhasil dipromosikan');
     }
 
     public static function demote(User $user)
     {
-        $user->update(['role_id' => 3]);
+        $user->update(['role_id' => Role::where('name', 'member')->pluck('id')]);
 
         self::flash('User berhasil didegradasi');
     }
