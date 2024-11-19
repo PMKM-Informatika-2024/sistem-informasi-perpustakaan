@@ -17,14 +17,13 @@
         </div>
       </div>
       <div class="flex flex-shrink-0 flex-col space-y-3 md:flex-row md:items-center md:space-x-3 md:space-y-0">
-        <button type="button" x-on:click="$dispatch('open-modal', { modal: 'create' })"
-          class="flex items-center justify-center rounded-lg bg-primary-700 px-4 py-2 text-sm font-medium text-white hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700">
+        <a href="{{ route('view create user') }}" class="flex items-center justify-center rounded-lg bg-primary-700 px-4 py-2 text-sm font-medium text-white hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700">
           <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
               d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z" clip-rule="evenodd" />
           </svg>
           <span>Tambah</span>
-        </button>
+        </a>
         <button type="button" x-on:click="$dispatch('open-modal', { modal: 'delete all' })"
           class="flex items-center justify-center rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700">
           <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -112,7 +111,7 @@
                 <td class="px-4 py-3">{{ $user->address }}</td>
                 <td class="px-4 py-3">{{ $user->created_at->translatedFormat('j F Y') }}</td>
                 <td class="flex items-center justify-end px-4 py-3">
-                  <button x-on:click="$dispatch('set-id', { id: {{ $user->id }} })" type="button"
+                  <a href="{{ route('view edit user', ['user' => $user->id]) }}"
                     class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"
@@ -120,7 +119,7 @@
                         clip-rule="evenodd" />
                     </svg>
                     <span class="sr-only">Edit</span>
-                  </button>
+                  </a>
                   @if ($user->role->name === 'karyawan')
                     <div>
                       <button type="button" x-on:click="$dispatch('open-modal', { modal: 'role', data: '{{ $user->name }}', type: 'demote' })"
