@@ -5,6 +5,7 @@ namespace App\Livewire\Modal\Category;
 use Livewire\Component;
 use App\Models\Category;
 use App\Services\CategoryService;
+use Illuminate\Support\Facades\Session;
 
 class Delete extends Component
 {
@@ -12,11 +13,12 @@ class Delete extends Component
     {
         $category = Category::where('name', $name)->firstOrFail();
 
-        CategoryService::delete($category);
+        $category->delete();
 
         $this->dispatch('close-modal');
+        Session::flash("success", "Berhasil Menghapus Kategori");
 
-        return $this->redirectRoute('manage categories');
+        return $this->redirectRoute('manage category');
     }
 
     public function render()

@@ -17,6 +17,7 @@ class Role extends Component
 
         $this->dispatch('close-modal');
         Session::flash('success', 'Berhasil promote member');
+
         return $this->redirectRoute('manage user');
     }
 
@@ -27,6 +28,7 @@ class Role extends Component
 
         $this->dispatch('close-modal');
         Session::flash('success', 'Berhasil demote member');
+
         return $this->redirectRoute('manage user');
     }
 
