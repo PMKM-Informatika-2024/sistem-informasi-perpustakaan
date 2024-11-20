@@ -14,8 +14,8 @@ class UserSeeder extends Seeder
         User::factory(100)->create();
         User::factory()->create([
             'role_id' => Role::first('id'),
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
+            'name' => 'Phasya Ananta',
+            'username' => 'admin',
             'password' => Hash::make(config('env.secret')),
         ]);
     }

@@ -18,9 +18,8 @@ class Update extends FormRequest
     {
         return [
             "name" => ["required", Rule::unique("users", "name")->ignore($user->id)],
-            "email" => ["required", "email:dns", Rule::unique("users", "email")->ignore($user->id)],
+            "username" => ["required", Rule::unique("users", "username")->ignore($user->id)],
             "phone_number" => ["required", "numeric", Rule::unique("users", "phone_number")->ignore($user->id), "phone:ID"],
-            "address" => "required|string|max:255"
         ];
     }
 }

@@ -16,9 +16,8 @@ class UserFactory extends Factory
         return [
             'role_id' => fake()->randomElement(Role::all()->reject(fn(Role $role) => $role->name === 'admin')->pluck('id')),
             'name' => fake()->name(),
-            'email' => fake()->unique()->freeEmail(),
+            'username' => fake()->unique()->userName(),
             'phone_number' => fake()->unique()->e164PhoneNumber(),
-            'address' => fake()->address(),
             'password' => Hash::make(config('env.secret')),
         ];
     }

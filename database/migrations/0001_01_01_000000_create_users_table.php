@@ -15,9 +15,8 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->foreignUuid('role_id');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->string('phone_number')->nullable();
-            $table->text('address')->nullable();
             $table->string('password');
             $table->timestamps();
         });

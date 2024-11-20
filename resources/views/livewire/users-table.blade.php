@@ -1,4 +1,4 @@
-<div class="mt-3 max-w-screen-2xl">
+<div class="mt-4 max-w-screen-2xl">
   <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
     <div class="flex flex-col space-y-3 p-4 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0">
       <div class="w-full md:w-1/2">
@@ -82,9 +82,8 @@
             <tr>
               <th class="px-5 py-3">Role</th>
               <th class="px-4 py-3">Nama</th>
-              <th class="px-4 py-3">Email</th>
+              <th class="px-4 py-3">Username</th>
               <th class="px-4 py-3">No. HP</th>
-              <th class="px-4 py-3">Alamat</th>
               <th class="px-4 py-3">Tanggal Bergabung</th>
               <th class="px-4 py-3">
                 <span class="sr-only">Actions</span>
@@ -105,10 +104,9 @@
                   {{ $user->name }}
                 </th>
                 <td class="px-4 py-3">
-                  {{ $user->email }}
+                  {{ $user->username }}
                 </td>
                 <td class="px-4 py-3">{{ $user->phone_number }}</td>
-                <td class="px-4 py-3">{{ $user->address }}</td>
                 <td class="px-4 py-3">{{ $user->created_at->translatedFormat('j F Y') }}</td>
                 <td class="flex items-center justify-end px-4 py-3">
                   <a href="{{ route('view edit user', ['user' => $user->id]) }}"

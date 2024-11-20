@@ -16,8 +16,10 @@ class UserController
 {
     public function index()
     {
+        Session::put("menu", "Manage User");
+
         return view('dashboard.user', [
-            'title' => 'Manage User',
+            'title' => 'Manage User - Manajemen Perpustakaan',
             'roles' => Role::all()->reject(function ($role) {
                 return $role->name === 'admin';
             }),
@@ -26,8 +28,10 @@ class UserController
 
     public function create()
     {
+        Session::put("menu", "Tambah Member");
+
         return view("dashboard.user.create", [
-            'title' => 'Tambah Member Baru - Manajemen Perpustakaan',
+            'title' => 'Tambah Member - Manajemen Perpustakaan',
             'roles' => Role::all()->reject(function ($role) {
                 return $role->name === 'admin';
             }),
@@ -44,6 +48,8 @@ class UserController
 
     public function edit(User $user)
     {
+        Session::put("menu", "Edit Member");
+
         return view("dashboard.user.edit", [
             "title" => "Edit Member - Manajemen Perpustakaan",
             "user" => $user

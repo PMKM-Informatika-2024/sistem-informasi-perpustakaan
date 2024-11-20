@@ -1,5 +1,4 @@
 <x-dashboard.layout :title="$title">
-  <h1 class="text-3xl font-bold text-gray-100">{{ $title }}</h1>
   <livewire:users-table />
   <div>
     <x-partial.modal name="delete specific">
