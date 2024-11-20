@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Response;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BookController;
 
 Route::get('/', function () {
     return Response::redirectTo('/login');
@@ -26,20 +27,31 @@ Route::middleware('auth')->group(function () {
         ]);
     });
 
-    // Route::get("/dashboard/profile")
-
     Route::prefix('/dashboard')->group(function () {
         Route::middleware('admin')->group(function () {
-            Route::prefix('/users')->group(function () {
-                Route::get('/', [UserController::class, 'index'])->name('manage user');
-                Route::delete('/delete-all', [UserController::class, 'deleteAll'])->name('delete all user');
-            });
+            Route::resource("/users", UserController::class)->except(['show'])->names([
+                "index" => "manage user",
+                "create" => "view create user",
+                "store" => "store user",
+                "edit" => "view edit user",
+                "update" => "update user"
+            ])->whereUuid("user");
+
+            Route::delete('/users/delete-all', [UserController::class, 'deleteAll'])->name('delete all user');
         });
 
         Route::middleware('karyawan')->group(function () {
-            Route::prefix('/books')->group(function () {
-                Route::get('/categories', [CategoryController::class, 'index'])->name('manage categories');
-            });
+            Route::resource("/books/categories", CategoryController::class)->except(["show"])->names([
+                "index" => "manage category",
+                "create" => "view create category",
+                "store" => "store category",
+                "edit" => "view edit category",
+                "update" => "update category"
+            ]);
+
+            Route::resource("/books", BookController::class)->except(["show"])->names([
+                "index" => "manage book"
+            ]);
         });
     });
 
