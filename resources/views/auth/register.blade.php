@@ -15,20 +15,11 @@
         @enderror
       </div>
       <div>
-        <label for="address" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-        <input type="text" name="address" id="address"
+        <label for="username" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Username</label>
+        <input type="text" name="username" id="username"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-          placeholder="Jl. Pak Benceng" required value="{{ old('address') }}">
-        @error('address')
-          <p class="mt-2 text-sm font-medium text-red-600 dark:text-red-500">{{ $message }}</p>
-        @enderror
-      </div>
-      <div>
-        <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Email</label>
-        <input type="email" name="email" id="email"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-          placeholder="apalah@example.com" required value="{{ old('email') }}">
-        @error('email')
+          placeholder="akunkeren" required value="{{ old('username') }}">
+        @error('username')
           <p class="mt-2 text-sm font-medium text-red-600 dark:text-red-500">{{ $message }}</p>
         @enderror
       </div>

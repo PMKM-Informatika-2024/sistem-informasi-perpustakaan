@@ -16,10 +16,10 @@
       @endsession
       @csrf
       <div>
-        <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Email</label>
-        <input type="email" name="email" id="email"
+        <label for="username" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Username</label>
+        <input type="text" name="username" id="username"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-          placeholder="name@company.com" required="" value="{{ old('email') }}">
+          placeholder="akunkeren" required="" value="{{ old('username') }}">
       </div>
       <div>
         <label for="password" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Password</label>
