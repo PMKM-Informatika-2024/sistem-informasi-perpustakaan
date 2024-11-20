@@ -46,13 +46,13 @@
           </button>
           <ul id="dropdown-book" class="{{ Request::is('dashboard/books*') ? '' : 'hidden' }} space-y-2 py-2">
             <li>
-              <a href="{{ route('manage categories') }}"
+              <a href="{{ route('manage category') }}"
                 class="{{ Request::is('dashboard/books/categories') ? 'dark:bg-gray-700' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Kategori Buku
               </a>
             </li>
             <li>
-              <a href="{{ route('manage books') }}"
+              <a href="{{ route('manage book') }}"
                 class="{{ Request::is('dashboard/books') ? 'dark:bg-gray-700' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Kumpulan
                 Buku</a>
             </li>
