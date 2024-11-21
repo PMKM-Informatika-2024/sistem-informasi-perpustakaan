@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory(100)->create();
+        User::factory(9)->create();
         User::factory()->create([
             'role_id' => Role::first('id'),
             'name' => 'Phasya Ananta',
