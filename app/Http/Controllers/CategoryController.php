@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Category\Create;
 use App\Http\Requests\Category\Update;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class CategoryController
 {
@@ -33,7 +34,10 @@ class CategoryController
     {
         $data = $request->validated();
 
-        Category::create($data);
+        Category::create([
+            ...$data,
+            "slug" => Str::slug($data['name'])
+        ]);
 
         return redirect()->route("manage category")->with("success", "Berhasil Menambahkan Kategori");
     }
