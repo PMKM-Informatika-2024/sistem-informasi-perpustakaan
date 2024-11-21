@@ -44,10 +44,10 @@
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
           </button>
-          <ul id="dropdown-book" class="{{ Request::is('dashboard/books*') ? '' : 'hidden' }} space-y-2 py-2">
+          <ul id="dropdown-book" class="{{ Request::is('dashboard/books*') || Request::is('dashboard/categories*') ? '' : 'hidden' }} space-y-2 py-2">
             <li>
               <a href="{{ route('manage category') }}"
-                class="{{ Request::is('dashboard/books/categories') ? 'dark:bg-gray-700' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                class="{{ Request::is('dashboard/categories') ? 'dark:bg-gray-700' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Kategori Buku
               </a>
             </li>
