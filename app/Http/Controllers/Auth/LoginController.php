@@ -22,7 +22,7 @@ class LoginController
 
         if (! Auth::attempt($data)) {
             return Response::redirectTo('/login')->with('error', 'Email atau password salah')->withInput([
-                'email' => $data['email'],
+                'username' => $data['username'],
             ]);
         }
 
