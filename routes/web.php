@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\RestoreController;
+use App\Http\Controllers\DeleteAllController;
 
 Route::get('/', function () {
     return Response::redirectTo('/login');
@@ -29,29 +31,19 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/dashboard')->group(function () {
         Route::middleware('admin')->group(function () {
-            Route::resource("/users", UserController::class)->except(['show'])->names([
-                "index" => "manage user",
-                "create" => "view create user",
-                "store" => "store user",
-                "edit" => "view edit user",
-                "update" => "update user"
-            ])->whereUuid("user");
-
-            Route::delete('/users/delete-all', [UserController::class, 'deleteAll'])->name('delete all user');
+            Route::prefix("/users")->group(function () {
+                Route::get("/", [UserController::class, "index"])->name("manage user");
+                Route::delete('/delete-all', [UserController::class, 'deleteAll'])->name('delete all user');
+            });
         });
 
         Route::middleware('karyawan')->group(function () {
-            Route::resource("/books/categories", CategoryController::class)->except(["show"])->names([
-                "index" => "manage category",
-                "create" => "view create category",
-                "store" => "store category",
-                "edit" => "view edit category",
-                "update" => "update category"
-            ]);
+            Route::post("/restore/{type}/{id}", [RestoreController::class, "restore"])->name("restore")->where("type", "book|user|category")->withTrashed();
+            Route::delete("/delete-all/{type}", [DeleteAllController::class, "delete"])->name("delete all")->where("type", "book|user|category");
 
-            Route::resource("/books", BookController::class)->except(["show"])->names([
-                "index" => "manage book"
-            ]);
+            Route::get("/categories", [CategoryController::class, "index"])->name("manage category");
+            Route::get("/books", [BookController::class, "index"])->name("manage book");
+            Route::delete("/books/delete-all", [BookController::class, "deleteAll"])->name("delete all book");
         });
     });
 

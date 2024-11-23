@@ -20,11 +20,4 @@ class CategoryController
             'categories' => Category::withTrashed()->get(),
         ]);
     }
-
-    public function restore(Category $category)
-    {
-        $category->restore();
-
-        return redirect()->route('manage category')->with('success', "Kategori berhasil direstore");
-    }
 }
