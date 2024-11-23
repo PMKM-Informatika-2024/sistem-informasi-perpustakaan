@@ -3,6 +3,7 @@
 namespace App\Livewire\Modal\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
@@ -33,6 +34,7 @@ class Update extends Component
 
         $this->user->update($data);
 
+        Session::flash("success", "Member berhasil diperbarui");
         $this->dispatch("close-modal");
         return $this->redirectRoute("manage user");
     }
