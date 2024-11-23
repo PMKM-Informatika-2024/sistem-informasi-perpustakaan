@@ -9,23 +9,11 @@ use Livewire\Attributes\On;
 
 class Delete extends Component
 {
-    public ?Category $category = null;
-
-    public string $name;
-
-    #[On('prepare for delete')]
-    public function prepare(string $id)
+    public function delete(string $name)
     {
-        $this->category = Category::findorFail($id);
+        $category = Category::where('name', $name)->firstOrFail();
 
-        $this->name = $this->category->name;
-
-        $this->dispatch("open-modal", modal: 'delete category');
-    }
-
-    public function delete()
-    {
-        $this->category->delete();
+        $category->delete();
 
         Session::flash("success", "Kategori berhasil dihapus");
         $this->dispatch('close-modal');
