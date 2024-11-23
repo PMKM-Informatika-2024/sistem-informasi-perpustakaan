@@ -22,7 +22,7 @@ class Create extends Component
 
         Category::create([
             ...$data,
-            "name" => Str::of($data["name"])->title(),
+            "name" => Str::title($data["name"]),
             "slug" => Str::slug($data["name"]),
         ]);
 

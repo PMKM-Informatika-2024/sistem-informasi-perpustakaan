@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class Update extends Component
 {
@@ -18,7 +19,7 @@ class Update extends Component
     #[On(("prepare for update"))]
     public function prepare(string $id)
     {
-        $this->category = Category::query()->findOrFail($id);
+        $this->category = Category::query()->withTrashed()->findOrFail($id);
 
         $this->name = $this->category->name;
         $this->description = $this->category->description;
@@ -30,7 +31,11 @@ class Update extends Component
     {
         $data = $this->validate();
 
-        $this->category->update($data);
+        $this->category->update([
+            ...$data,
+            "name" => Str::title($data["name"]),
+            "slug" => Str::slug($data["name"]),
+        ]);
 
         Session::flash("success", "Kategori berhasil diperbarui");
         $this->dispatch("close-modal");
