@@ -12,35 +12,19 @@ class UsersTable extends Component
 {
     use WithPagination;
 
-    #[Url(as: 'search')]
+    #[Url(as: 'nama')]
     public string $keyword = '';
 
     public function render()
     {
         return view('livewire.users-table')->with([
-            'roles' => Role::all()->reject(function ($role) {
-                return $role->name === 'admin';
-            }),
-            'users' => $this->keyword === '' ? $this->allExceptAdmin() : $this->search($this->keyword),
+            'roles' => Role::all()->reject(fn(Role $role) => $role->name === 'admin'),
+            'users' => User::withTrashed()->where("name", "LIKE", "%{$this->keyword}%")->latest()->excludeAdmin()->withPaginate(),
         ]);
     }
 
     public function paginationView()
     {
         return 'vendor.pagination.tailwind';
-    }
-
-    private function search(string $keyword)
-    {
-        return User::excludeAdmin()->where('name', 'LIKE', "%{$keyword}%")->latest()->withPaginate();
-    }
-
-    private function allExceptAdmin()
-    {
-        if (request()->has('role')) {
-            return User::excludeAdmin()->role(request('role'))->latest()->withPaginate();
-        }
-
-        return User::excludeAdmin()->latest()->withPaginate();
     }
 }
