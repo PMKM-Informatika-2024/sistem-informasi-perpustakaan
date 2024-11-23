@@ -5,6 +5,7 @@ namespace App\Livewire\Modal\User;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
 
@@ -38,6 +39,7 @@ class Create extends Component
             "password" => Hash::make(config("env.secret"))
         ]);
 
+        Session::flash("success", "Member berhasil ditambahkan");
         $this->dispatch("close-modal");
         return $this->redirectRoute("manage user");
     }
