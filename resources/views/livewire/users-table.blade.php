@@ -1,4 +1,4 @@
-<div class="mt-3 max-w-screen-2xl">
+<div class="mt-4 max-w-screen-2xl">
   <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
     <div class="flex flex-col space-y-3 p-4 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0">
       <div class="w-full md:w-1/2">
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="flex flex-shrink-0 flex-col space-y-3 md:flex-row md:items-center md:space-x-3 md:space-y-0">
-        <button type="button" x-on:click="$dispatch('open-modal', { modal: 'create' })"
+        <button type="button" x-on:click="$dispatch('open-modal', { modal: 'create user' })"
           class="flex items-center justify-center rounded-lg bg-primary-700 px-4 py-2 text-sm font-medium text-white hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700">
           <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
@@ -48,7 +48,7 @@
         <form id="filterDropdown" class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-gray-700">
           <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
             @foreach ($roles as $role)
-              <li class="flex items-center">
+              <li wire:key="{{ $role->id }}" class="flex items-center">
                 <input id="{{ $role->name }}" type="radio" {{ Request::get('role') === $role->name ? 'checked' : '' }} name="role" onchange="this.form.submit()" value="{{ $role->name }}"
                   class="size-4 rounded-full border-gray-300 bg-gray-100 text-primary-600 focus:ring-0 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600">
                 <label for="{{ $role->name }}" class="ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-100">{{ Str::ucfirst($role->name) }} ({{ $role->users->count() }})</label>
@@ -83,9 +83,8 @@
             <tr>
               <th class="px-5 py-3">Role</th>
               <th class="px-4 py-3">Nama</th>
-              <th class="px-4 py-3">Email</th>
+              <th class="px-4 py-3">Username</th>
               <th class="px-4 py-3">No. HP</th>
-              <th class="px-4 py-3">Alamat</th>
               <th class="px-4 py-3">Tanggal Bergabung</th>
               <th class="px-4 py-3">
                 <span class="sr-only">Actions</span>
@@ -94,7 +93,7 @@
           </thead>
           <tbody>
             @foreach ($users as $user)
-              <tr wire:key="{{ $user->name }}" class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
+              <tr wire:key="{{ $user->id }}" class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
                 <td class="px-4 py-2">
                   @if ($user->role->name == 'karyawan')
                     <span class="me-2 rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-300">{{ Str::ucfirst($user->role->name) }}</span>
@@ -106,13 +105,12 @@
                   {{ $user->name }}
                 </th>
                 <td class="px-4 py-3">
-                  {{ $user->email }}
+                  {{ $user->username }}
                 </td>
                 <td class="px-4 py-3">{{ $user->phone_number }}</td>
-                <td class="px-4 py-3">{{ $user->address }}</td>
                 <td class="px-4 py-3">{{ $user->created_at->translatedFormat('j F Y') }}</td>
                 <td class="flex items-center justify-end px-4 py-3">
-                  <button x-on:click="$dispatch('open-modal', { modal: 'update', data: {{ $user }} })" type="button"
+                  <button type="button" x-on:click="$dispatch('update', { id: '{{ $user->id }}' })"
                     class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"

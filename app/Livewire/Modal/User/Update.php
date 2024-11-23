@@ -3,39 +3,48 @@
 namespace App\Livewire\Modal\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
-use App\Services\UserService;
+use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
 
 class Update extends Component
 {
+    public ?User $user = null;
+
     public string $name;
-
-    public string $email;
-
+    public string $username;
     public string $phone_number;
 
-    public string $address;
+    #[On(('update'))]
+    public function prepare(string $id)
+    {
+        $this->user = User::query()->findOrFail($id);
+
+        $this->name = $this->user->name;
+        $this->username = $this->user->username;
+        $this->phone_number = $this->user->phone_number;
+
+        $this->dispatch("open-modal", modal: "update user");
+    }
 
     public function update()
     {
-        $this->validate();
+        $data = $this->validate();
 
-        $user = User::where('name', $this->name)->firstOrFail();
-        UserService::update($user, $this->all());
+        $this->user->update($data);
 
-        $this->dispatch('close-modal');
-
-        return $this->redirectRoute('manage user');
+        Session::flash("success", "Member berhasil diperbarui");
+        $this->dispatch("close-modal");
+        return $this->redirectRoute("manage user");
     }
 
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => Rule::when(fn () => request()->components[0]['updates']['email'] !== $this->email, 'required|email:dns|unique:users,email'),
-            'phone_number' => 'required|numeric',
-            'address' => 'required|string|max:255',
+            "name" => ["required", "string", Rule::unique("users", "name")->ignore($this->user->id)],
+            "username" => ["required", "string", Rule::unique("users", "username")->ignore($this->user->id)],
+            "phone_number" => ["required", "string", Rule::unique("users", "phone_number")->ignore($this->user->id)],
         ];
     }
 

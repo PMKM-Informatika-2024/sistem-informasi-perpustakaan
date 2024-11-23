@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\Auth\Register;
 use Illuminate\Support\Facades\Response;
+use App\Models\Role;
 
 class RegisterController
 {
@@ -15,17 +16,17 @@ class RegisterController
         ]);
     }
 
-    public function register(RegisterRequest $request)
+    public function register(Register $request)
     {
         $data = $request->validated();
 
         User::create([
-            'role_id' => 3,
+            'role_id' => Role::where('name', 'member')->first()->id,
             ...$data,
         ]);
 
         return Response::redirectTo('/login')->withInput([
-            'email' => $data['email'],
+            'username' => $data['username'],
         ]);
     }
 }
