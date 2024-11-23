@@ -11,11 +11,11 @@ class Delete extends Component
     public function delete(string $name)
     {
         $user = User::where('name', $name)->firstOrFail();
+
         $user->delete();
 
+        Session::flash('success', 'Member berhasil dihapus');
         $this->dispatch('close-modal');
-        Session::flash('success', 'Berhasil menghapus member');
-
         return $this->redirectRoute('manage user');
     }
 
