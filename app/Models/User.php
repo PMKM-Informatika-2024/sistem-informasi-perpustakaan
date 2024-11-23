@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Prunable;
 
 class User extends Authenticatable
 {
-    use HasUuids, HasFactory, Notifiable;
+    use HasUuids, HasFactory, Notifiable, SoftDeletes, Prunable;
 
     protected $guarded = ['id'];
 

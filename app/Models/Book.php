@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Prunable;
-use Illuminate\Database\Eloquent\Builder;
 
-class Category extends Model
+class Book extends Model
 {
-    use HasUuids, SoftDeletes, Prunable;
+    use HasFactory, HasUuids, SoftDeletes, Prunable;
 
-    protected $guarded = ['id'];
+    protected $guarded = ["id"];
 
-    public function books()
+    public function category()
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function scopeWithPaginate(Builder $query, int $perPage = 6)
