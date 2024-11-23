@@ -1,6 +1,9 @@
 <x-dashboard.layout :title="$title">
   <livewire:users-table />
   <div>
+    <x-partial.modal name="create user">
+      <livewire:modal.user.create />
+    </x-partial.modal>
     <x-partial.modal name="delete specific">
       <livewire:modal.user.delete />
     </x-partial.modal>
@@ -33,6 +36,9 @@
     </x-partial.modal>
     <x-partial.modal name="role">
       <livewire:modal.user.role />
+    </x-partial.modal>
+    <x-partial.modal name="update user">
+      <livewire:modal.user.update />
     </x-partial.modal>
   </div>
   <x-partial.toast type="success" />
