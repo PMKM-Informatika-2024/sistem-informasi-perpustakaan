@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignUuid('role_id');
             $table->string('name')->unique();
             $table->string('username')->unique();
-            $table->string('phone_number')->unique()->nullable();
+            $table->string('phone_number')->unique();
             $table->string('password');
+            $table->softDeletes();
             $table->timestamps();
         });
 
