@@ -3,12 +3,13 @@
     <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
       <div class="flex flex-col justify-end space-y-3 px-4 py-3 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0">
         <div class="flex flex-shrink-0 flex-col space-y-3 md:flex-row md:items-center md:space-x-3 md:space-y-0 lg:justify-end">
-          <a href="{{ route('view create category') }}" class="flex items-center justify-center rounded-lg bg-primary-700 px-4 py-2 text-sm font-medium text-white hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700">
+          <button x-data type="button" x-on:click="$dispatch('open-modal', { modal: 'create category' })"
+            class="flex items-center justify-center rounded-lg bg-primary-700 px-4 py-2 text-sm font-medium text-white hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700">
             <svg class="size-4 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
             </svg>
             <span>Tambah Kategori</span>
-          </a>
+          </button>
         </div>
       </div>
       <div class="overflow-x-auto">
@@ -37,7 +38,7 @@
                     {{ $category->description }}
                   </td>
                   <td class="flex items-center justify-end px-4 py-3">
-                    <a href="{{ route('view edit category', ['category' => $category->id]) }}"
+                    <button x-data x-on:click="$dispatch('prepare for update', { id: '{{ $category->id }}' })" type="button"
                       class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                       <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -45,8 +46,8 @@
                           clip-rule="evenodd" />
                       </svg>
                       <span class="sr-only">Edit</span>
-                    </a>
-                    <button x-data x-on:click="$dispatch('open-modal', { modal: 'delete specific category', data: '{{ $category->name }}' })" type="button"
+                    </button>
+                    <button x-data x-on:click="$dispatch('open-modal', { modal: 'delete category', data: '{{ $category->name }}' })" type="button"
                       class="me-2 inline-flex items-center rounded-full bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                       <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -65,8 +66,14 @@
     </div>
   </div>
   <div>
-    <x-partial.modal name="delete specific category">
+    <x-partial.modal name="create category">
+      <livewire:modal.category.create />
+    </x-partial.modal>
+    <x-partial.modal name="delete category">
       <livewire:modal.category.delete />
+    </x-partial.modal>
+    <x-partial.modal name="update category">
+      <livewire:modal.category.update />
     </x-partial.modal>
   </div>
   <x-partial.toast type="success" />
