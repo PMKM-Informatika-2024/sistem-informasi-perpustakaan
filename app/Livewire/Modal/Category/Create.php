@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Str;
 
 class Create extends Component
 {
@@ -19,7 +20,11 @@ class Create extends Component
     {
         $data = $this->validate();
 
-        Category::create($data);
+        Category::create([
+            ...$data,
+            "name" => Str::of($data["name"])->title(),
+            "slug" => Str::slug($data["name"]),
+        ]);
 
         Session::flash("success", "Kategori berhasil ditambahkan");
         $this->dispatch("close-modal");
