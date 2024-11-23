@@ -15,7 +15,7 @@ class Update extends Component
     public string $name;
     public string $description;
 
-    #[On(("prepare"))]
+    #[On(("prepare for update"))]
     public function prepare(string $id)
     {
         $this->category = Category::query()->findOrFail($id);
