@@ -48,7 +48,7 @@
         <form id="filterDropdown" class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-gray-700">
           <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
             @foreach ($roles as $role)
-              <li class="flex items-center">
+              <li wire:key="{{ $role->id }}" class="flex items-center">
                 <input id="{{ $role->name }}" type="radio" {{ Request::get('role') === $role->name ? 'checked' : '' }} name="role" onchange="this.form.submit()" value="{{ $role->name }}"
                   class="size-4 rounded-full border-gray-300 bg-gray-100 text-primary-600 focus:ring-0 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600">
                 <label for="{{ $role->name }}" class="ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-100">{{ Str::ucfirst($role->name) }} ({{ $role->users->count() }})</label>
@@ -93,7 +93,7 @@
           </thead>
           <tbody>
             @foreach ($users as $user)
-              <tr wire:key="{{ $user->name }}" class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
+              <tr wire:key="{{ $user->id }}" class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
                 <td class="px-4 py-2">
                   @if ($user->role->name == 'karyawan')
                     <span class="me-2 rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-300">{{ Str::ucfirst($user->role->name) }}</span>
