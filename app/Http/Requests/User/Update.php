@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Container\Attributes\RouteParameter;
 use App\Models\User;
+use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Container\Attributes\RouteParameter;
 
 class Update extends FormRequest
 {
@@ -14,12 +14,12 @@ class Update extends FormRequest
         return true;
     }
 
-    public function rules(#[RouteParameter("user")] User $user)
+    public function rules(#[RouteParameter('user')] User $user)
     {
         return [
-            "name" => ["required", Rule::unique("users", "name")->ignore($user->id)],
-            "username" => ["required", Rule::unique("users", "username")->ignore($user->id)],
-            "phone_number" => ["required", "numeric", Rule::unique("users", "phone_number")->ignore($user->id), "phone:ID"],
+            'name' => ['required', Rule::unique('users', 'name')->ignore($user->id)],
+            'username' => ['required', Rule::unique('users', 'username')->ignore($user->id)],
+            'phone_number' => ['required', 'numeric', Rule::unique('users', 'phone_number')->ignore($user->id), 'phone:ID'],
         ];
     }
 }

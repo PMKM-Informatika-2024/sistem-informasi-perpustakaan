@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Http\Requests\Auth\Register;
 use Illuminate\Support\Facades\Response;
-use App\Models\Role;
 
 class RegisterController
 {

@@ -14,7 +14,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'role_id' => fake()->randomElement(Role::all()->reject(fn(Role $role) => $role->name === 'admin')->pluck('id')),
+            'role_id' => fake()->randomElement(Role::all()->reject(fn (Role $role) => $role->name === 'admin')->pluck('id')),
             'name' => fake()->name(),
             'username' => fake()->unique()->userName(),
             'phone_number' => fake()->unique()->e164PhoneNumber(),

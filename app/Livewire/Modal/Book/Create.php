@@ -3,10 +3,10 @@
 namespace App\Livewire\Modal\Book;
 
 use App\Models\Book;
-use App\Models\Category;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
@@ -35,14 +35,15 @@ class Create extends Component
         Book::create($data);
 
         Session::flash('success', 'Buku berhasil ditambahkan');
-        $this->dispatch("close-modal");
+        $this->dispatch('close-modal');
+
         return $this->redirectRoute('manage book');
     }
 
     public function render()
     {
         return view('livewire.modal.book.create')->with([
-            "categories" => Category::all()
+            'categories' => Category::all(),
         ]);
     }
 }

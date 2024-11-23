@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Modal\Category;
 
-use App\Models\Category;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
-use Livewire\Attributes\Validate;
+use App\Models\Category;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
-    #[Validate(rule: "required|unique:categories,name")]
+    #[Validate(rule: 'required|unique:categories,name')]
     public string $name;
 
     #[Validate(rule: 'required|string|max:255')]
@@ -22,12 +22,13 @@ class Create extends Component
 
         Category::create([
             ...$data,
-            "name" => Str::title($data["name"]),
-            "slug" => Str::slug($data["name"]),
+            'name' => Str::title($data['name']),
+            'slug' => Str::slug($data['name']),
         ]);
 
-        Session::flash("success", "Kategori berhasil ditambahkan");
-        $this->dispatch("close-modal");
+        Session::flash('success', 'Kategori berhasil ditambahkan');
+        $this->dispatch('close-modal');
+
         return $this->redirectRoute('manage category');
     }
 

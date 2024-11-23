@@ -4,10 +4,10 @@ namespace App\Livewire\Modal\User;
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
@@ -26,7 +26,7 @@ class Create extends Component
     public function render()
     {
         return view('livewire.modal.user.create')->with([
-            "roles" => Role::all()->reject(fn(Role $role) => $role->name === "admin")
+            'roles' => Role::all()->reject(fn (Role $role) => $role->name === 'admin'),
         ]);
     }
 
@@ -36,11 +36,12 @@ class Create extends Component
 
         User::create([
             ...$data,
-            "password" => Hash::make(config("env.secret"))
+            'password' => Hash::make(config('env.secret')),
         ]);
 
-        Session::flash("success", "Member berhasil ditambahkan");
-        $this->dispatch("close-modal");
-        return $this->redirectRoute("manage user");
+        Session::flash('success', 'Member berhasil ditambahkan');
+        $this->dispatch('close-modal');
+
+        return $this->redirectRoute('manage user');
     }
 }

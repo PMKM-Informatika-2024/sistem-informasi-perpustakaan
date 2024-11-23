@@ -2,21 +2,22 @@
 
 namespace App\Livewire\Modal\Category;
 
-use App\Models\Category;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 
 class Update extends Component
 {
     public ?Category $category = null;
 
     public string $name;
+
     public string $description;
 
-    #[On(("prepare for update"))]
+    #[On(('prepare for update'))]
     public function prepare(string $id)
     {
         $this->category = Category::query()->withTrashed()->findOrFail($id);
@@ -24,7 +25,7 @@ class Update extends Component
         $this->name = $this->category->name;
         $this->description = $this->category->description;
 
-        $this->dispatch("open-modal", modal: "update category");
+        $this->dispatch('open-modal', modal: 'update category');
     }
 
     public function update()
@@ -33,20 +34,21 @@ class Update extends Component
 
         $this->category->update([
             ...$data,
-            "name" => Str::title($data["name"]),
-            "slug" => Str::slug($data["name"]),
+            'name' => Str::title($data['name']),
+            'slug' => Str::slug($data['name']),
         ]);
 
-        Session::flash("success", "Kategori berhasil diperbarui");
-        $this->dispatch("close-modal");
-        return $this->redirectRoute("manage category");
+        Session::flash('success', 'Kategori berhasil diperbarui');
+        $this->dispatch('close-modal');
+
+        return $this->redirectRoute('manage category');
     }
 
     public function rules()
     {
         return [
-            "name" => ['required', 'string', 'max:255', Rule::unique(Category::class, 'name')->ignore($this->category->id)],
-            "description" => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', Rule::unique(Category::class, 'name')->ignore($this->category->id)],
+            'description' => ['required', 'string', 'max:255'],
         ];
     }
 

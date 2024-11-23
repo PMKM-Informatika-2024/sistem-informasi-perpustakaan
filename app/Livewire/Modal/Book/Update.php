@@ -4,23 +4,28 @@ namespace App\Livewire\Modal\Book;
 
 use App\Models\Book;
 use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Models\Category;
-use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
 
 class Update extends Component
 {
     public ?Book $book = null;
 
     public string $code;
+
     public string $title;
+
     public string $author;
+
     public string $publisher;
+
     public string $year;
+
     public string $category_id;
 
-    #[On("prepare book")]
+    #[On('prepare book')]
     public function prepare(string $id)
     {
         $this->book = Book::withTrashed()->findOrFail($id);
@@ -32,7 +37,7 @@ class Update extends Component
         $this->year = $this->book->year;
         $this->category_id = $this->book->category_id;
 
-        $this->dispatch("open-modal", modal: "update book");
+        $this->dispatch('open-modal', modal: 'update book');
     }
 
     public function update()
@@ -41,27 +46,28 @@ class Update extends Component
 
         $this->book->update($data);
 
-        Session::flash("success", "Buku berhasil diperbarui");
-        $this->dispatch("close-modal");
-        return $this->redirectRoute("manage book");
+        Session::flash('success', 'Buku berhasil diperbarui');
+        $this->dispatch('close-modal');
+
+        return $this->redirectRoute('manage book');
     }
 
     public function rules()
     {
         return [
-            "code" => ["required", "string", "max:255", Rule::unique("books", "code")->ignore($this->book->id)],
-            "title" => "required|string",
-            "author" => "required|string",
-            "publisher" => "required|string",
-            "year" => "required|numeric",
-            "category_id" => "required|exists:categories,id"
+            'code' => ['required', 'string', 'max:255', Rule::unique('books', 'code')->ignore($this->book->id)],
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'publisher' => 'required|string',
+            'year' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 
     public function render()
     {
         return view('livewire.modal.book.update')->with([
-            "categories" => Category::all()
+            'categories' => Category::all(),
         ]);
     }
 }

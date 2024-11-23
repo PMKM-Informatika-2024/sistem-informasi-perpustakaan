@@ -14,10 +14,10 @@ class Create extends FormRequest
     public function rules()
     {
         return [
-            "role_id" => "required|exists:roles,id",
-            "name" => "required|unique:users,name",
-            "username" => "required|unique:users,username",
-            "phone_number" => "required|numeric|unique:users,phone_number|phone:ID",
+            'role_id' => 'required|exists:roles,id',
+            'name' => 'required|unique:users,name',
+            'username' => 'required|unique:users,username',
+            'phone_number' => 'required|numeric|unique:users,phone_number|phone:ID',
         ];
     }
 }

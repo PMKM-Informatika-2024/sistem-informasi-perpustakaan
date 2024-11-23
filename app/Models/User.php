@@ -4,22 +4,24 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Prunable;
 
 class User extends Authenticatable
 {
-    use HasUuids, HasFactory, Notifiable, SoftDeletes, Prunable;
+    use HasFactory, HasUuids, Notifiable, Prunable, SoftDeletes;
 
     protected $guarded = ['id'];
 
     protected $with = ['role'];
 
     protected $hidden = ['password'];
-    protected $keyType = "uuid";
+
+    protected $keyType = 'uuid';
+
     public $incrementing = false;
 
     public function role()

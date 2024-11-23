@@ -14,8 +14,8 @@ class Create extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|unique:categories,name",
-            "description" => "required|string|max:255"
+            'name' => 'required|unique:categories,name',
+            'description' => 'required|string|max:255',
         ];
     }
 }

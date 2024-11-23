@@ -18,8 +18,8 @@ class UsersTable extends Component
     public function render()
     {
         return view('livewire.users-table')->with([
-            'roles' => Role::all()->reject(fn(Role $role) => $role->name === 'admin'),
-            'users' => User::withTrashed()->where("name", "LIKE", "%{$this->keyword}%")->latest()->excludeAdmin()->withPaginate(),
+            'roles' => Role::all()->reject(fn (Role $role) => $role->name === 'admin'),
+            'users' => User::withTrashed()->where('name', 'LIKE', "%{$this->keyword}%")->latest()->excludeAdmin()->withPaginate(),
         ]);
     }
 

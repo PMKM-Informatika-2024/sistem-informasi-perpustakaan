@@ -3,8 +3,8 @@
 namespace App\Livewire\Modal\User;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use Illuminate\Support\Facades\Session;
 
 class Delete extends Component
 {
@@ -16,6 +16,7 @@ class Delete extends Component
 
         Session::flash('success', 'Member berhasil dihapus');
         $this->dispatch('close-modal');
+
         return $this->redirectRoute('manage user');
     }
 
