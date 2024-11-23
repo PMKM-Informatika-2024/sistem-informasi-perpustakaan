@@ -26,44 +26,6 @@ class UserController
         ]);
     }
 
-    public function create()
-    {
-        Session::put("menu", "Tambah Member");
-
-        return view("dashboard.user.create", [
-            'title' => 'Tambah Member - Manajemen Perpustakaan',
-            'roles' => Role::all()->reject(function ($role) {
-                return $role->name === 'admin';
-            }),
-        ]);
-    }
-
-    public function store(Create $request)
-    {
-        $data = $request->validated();
-
-        User::create([...$data, "password" => Hash::make(config("env.secret"))]);
-        return redirect()->route("manage user")->with("success", "Berhasil Menambahkan Member");
-    }
-
-    public function edit(User $user)
-    {
-        Session::put("menu", "Edit Member");
-
-        return view("dashboard.user.edit", [
-            "title" => "Edit Member - Manajemen Perpustakaan",
-            "user" => $user
-        ]);
-    }
-
-    public function update(Update $request, User $user)
-    {
-        $data = $request->validated();
-
-        $user->update($data);
-        return redirect()->route("manage user")->with("success", "Berhasil Mengubah Data Member");
-    }
-
     public function deleteAll()
     {
         User::excludeAdmin()->delete();
