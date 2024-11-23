@@ -28,7 +28,7 @@
           <input type="text" wire:model="username" id="username"
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
             placeholder="Udin Petot" required>
-          @error('name')
+          @error('username')
             <span class="text-sm text-red-400">{{ $message }}</span>
           @enderror
         </div>
