@@ -17,10 +17,10 @@ class Update extends Component
 
     public string $description;
 
-    #[On(('prepare for update'))]
+    #[On(('update'))]
     public function prepare(string $id)
     {
-        $this->category = Category::query()->withTrashed()->findOrFail($id);
+        $this->category = Category::findOrFail($id);
 
         $this->name = $this->category->name;
         $this->description = $this->category->description;
