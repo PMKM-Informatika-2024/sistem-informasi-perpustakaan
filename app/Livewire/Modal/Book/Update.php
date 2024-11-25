@@ -25,10 +25,10 @@ class Update extends Component
 
     public string $category_id;
 
-    #[On('prepare book')]
+    #[On('update')]
     public function prepare(string $id)
     {
-        $this->book = Book::withTrashed()->findOrFail($id);
+        $this->book = Book::findOrFail($id);
 
         $this->code = $this->book->code;
         $this->title = $this->book->title;
@@ -48,7 +48,6 @@ class Update extends Component
 
         Session::flash('success', 'Buku berhasil diperbarui');
         $this->dispatch('close-modal');
-
         return $this->redirectRoute('manage book');
     }
 

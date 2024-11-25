@@ -1,4 +1,4 @@
-<div class="mt-4 max-w-screen-2xl">
+<div class="my-4 max-w-screen-2xl">
   <div class="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
     <div class="flex flex-col space-y-3 p-4 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0">
       <div class="w-full md:w-1/2">
@@ -106,37 +106,23 @@
                   {{ $book->year }}
                 </td>
                 <td class="flex items-center justify-end px-4 py-3">
-                  <button x-on:click="$dispatch('prepare book', { id: '{{ $book->id }}' })" type="button"
-                    class="me-2 inline-flex items-center gap-1.5 rounded-lg bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <button x-on:click="$dispatch('update', { id: '{{ $book->id }}' })" type="button"
+                    class="me-2 inline-flex items-center gap-1.5 rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"
                         d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z"
                         clip-rule="evenodd" />
                     </svg>
-                    <span>Edit</span>
+                    <span class="sr-only">Edit</span>
                   </button>
-                  @if ($book->trashed())
-                    <form action="{{ route('restore', ['type' => 'book', 'id' => $book->id]) }}" method="POST">
-                      @csrf
-                      <button type="submit"
-                        class="me-2 inline-flex items-center gap-1.5 rounded-lg bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                          <path fill-rule="evenodd"
-                            d="M3 6a3 3 0 1 1 4 2.83v6.34a3.001 3.001 0 1 1-2 0V8.83A3.001 3.001 0 0 1 3 6Zm11.207-2.707a1 1 0 0 1 0 1.414L13.914 5H15a4 4 0 0 1 4 4v6.17a3.001 3.001 0 1 1-2 0V9a2 2 0 0 0-2-2h-1.086l.293.293a1 1 0 0 1-1.414 1.414l-2-2a1 1 0 0 1 0-1.414l2-2a1 1 0 0 1 1.414 0Z"
-                            clip-rule="evenodd" />
-                        </svg>
-                        <span>Restore</span>
-                      </button>
-                    </form>
-                  @endif
-                  <button x-on:click="$dispatch('open-modal', { modal: 'delete book', data: '{{ $book->title }}' })" type="button"
-                    class="me-2 inline-flex items-center gap-1.5 rounded-lg bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                  <button x-on:click="$dispatch('delete', { id: '{{ $book->id }}' })" type="button"
+                    class="me-2 inline-flex items-center gap-1.5 rounded-full bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"
                         d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
                         clip-rule="evenodd" />
                     </svg>
-                    <span>Delete</span>
+                    <span class="sr-only">Delete</span>
                   </button>
                 </td>
               </tr>
@@ -144,9 +130,6 @@
           </tbody>
         </table>
       @endif
-    </div>
-    <div wire:loading.remove wire:target="keyword">
-      {{ $books->links() }}
     </div>
   </div>
 </div>
