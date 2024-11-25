@@ -6,14 +6,24 @@ use App\Models\User;
 use Livewire\Component;
 use App\Models\Role as Model;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\On;
 
 class Role extends Component
 {
-    public function promote(string $name)
-    {
-        $user = User::where('name', $name)->firstOrFail();
+    public ?User $user = null;
 
-        $user->update(['role_id' => Model::where('name', 'karyawan')->first()->id]);
+    #[On("role")]
+    public function prepare(string $id, string $type)
+    {
+        $this->user = User::findOrFail($id);
+
+        $this->dispatch("open-modal", modal: "role", type: $type);
+    }
+
+
+    public function promote()
+    {
+        $this->user->update(['role_id' => Model::where('name', 'karyawan')->first()->id]);
 
         Session::flash('success', 'Member berhasil dipromosikan');
         $this->dispatch('close-modal');
@@ -21,11 +31,9 @@ class Role extends Component
         return $this->redirectRoute('manage user');
     }
 
-    public function demote(string $name)
+    public function demote()
     {
-        $user = User::where('name', $name)->firstOrFail();
-
-        $user->update(['role_id' => Model::where('name', 'member')->first()->id]);
+        $this->user->update(['role_id' => Model::where('name', 'member')->first()->id]);
 
         Session::flash('success', 'Member berhasil diturunkan');
         $this->dispatch('close-modal');
