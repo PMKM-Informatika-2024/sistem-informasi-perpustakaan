@@ -21,7 +21,7 @@ class Restore extends Component
 
     public function render()
     {
-        return view('livewire.modal.user.restore')->with([
+        return view('livewire.modal.member.restore')->with([
             "user" => $this->user,
         ]);
     }

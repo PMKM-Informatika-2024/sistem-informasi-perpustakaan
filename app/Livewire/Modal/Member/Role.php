@@ -43,6 +43,6 @@ class Role extends Component
 
     public function render()
     {
-        return view('livewire.modal.user.role');
+        return view('livewire.modal.member.role');
     }
 }

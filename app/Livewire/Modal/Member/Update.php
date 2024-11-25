@@ -53,6 +53,6 @@ class Update extends Component
 
     public function render()
     {
-        return view('livewire.modal.user.update');
+        return view('livewire.modal.member.update');
     }
 }

@@ -30,6 +30,6 @@ class Destroy extends Component
 
     public function render()
     {
-        return view('livewire.modal.user.destroy');
+        return view('livewire.modal.member.destroy');
     }
 }

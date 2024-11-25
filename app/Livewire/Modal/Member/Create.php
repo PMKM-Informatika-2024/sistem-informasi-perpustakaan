@@ -25,7 +25,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.modal.user.create')->with([
+        return view('livewire.modal.member.create')->with([
             'roles' => Role::all()->reject(fn(Role $role) => $role->name === 'admin'),
         ]);
     }
