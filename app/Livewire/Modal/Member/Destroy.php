@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Modal\User;
+namespace App\Livewire\Modal\Member;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Session;

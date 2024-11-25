@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Modal\User;
+namespace App\Livewire\Modal\Member;
 
 use App\Models\Role;
 use App\Models\User;
@@ -26,7 +26,7 @@ class Create extends Component
     public function render()
     {
         return view('livewire.modal.user.create')->with([
-            'roles' => Role::all()->reject(fn (Role $role) => $role->name === 'admin'),
+            'roles' => Role::all()->reject(fn(Role $role) => $role->name === 'admin'),
         ]);
     }
 
