@@ -12,7 +12,7 @@ class UserController
     {
         Session::put('menu', 'Manage User');
 
-        return view('dashboard.user', [
+        return view('dashboard.users', [
             'title' => 'Manage User - Manajemen Perpustakaan',
             'roles' => Role::all()->reject(function ($role) {
                 return $role->name === 'admin';
