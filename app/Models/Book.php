@@ -15,7 +15,8 @@ class Book extends Model
     protected $guarded = ['id'];
 
     public $incrementing = false;
-    protected $keyType = "string";
+
+    protected $keyType = 'string';
 
     public function loan()
     {

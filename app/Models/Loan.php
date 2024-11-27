@@ -9,10 +9,11 @@ class Loan extends Model
 {
     use HasUuids;
 
-    protected $guarded = ["id"];
+    protected $guarded = ['id'];
 
     public $incrementing = false;
-    protected $keyType = "string";
+
+    protected $keyType = 'string';
 
     public function book()
     {
@@ -20,7 +21,6 @@ class Loan extends Model
     }
 
     public function member()
-
     {
         return $this->belongsTo(Member::class);
     }

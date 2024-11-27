@@ -8,13 +8,13 @@ use Livewire\Attributes\Url;
 
 class BookTable extends Component
 {
-    #[Url("judul")]
+    #[Url('judul')]
     public string $keyword = '';
 
     public function render()
     {
         return view('livewire.book-table')->with([
-            "books" => Book::where('title', "LIKE", "%{$this->keyword}%")->latest()->get()
+            'books' => Book::where('title', 'LIKE', "%{$this->keyword}%")->latest()->get(),
         ]);
     }
 }

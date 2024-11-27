@@ -10,8 +10,8 @@ class LoanController
     {
         Session::put('menu', 'Manage Peminjaman');
 
-        return view("dashboard.loans", [
-            "title" => "Peminjaman - Manajemen Perpustakaan",
+        return view('dashboard.loans', [
+            'title' => 'Peminjaman - Manajemen Perpustakaan',
         ]);
     }
 }

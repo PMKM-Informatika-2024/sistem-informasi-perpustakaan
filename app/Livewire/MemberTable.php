@@ -8,13 +8,13 @@ use Livewire\Attributes\Url;
 
 class MemberTable extends Component
 {
-    #[Url(as: "nama")]
+    #[Url(as: 'nama')]
     public string $keyword = '';
 
     public function render()
     {
         return view('livewire.member-table')->with([
-            "members" => Member::all(),
+            'members' => Member::all(),
         ]);
     }
 }

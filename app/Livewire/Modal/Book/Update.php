@@ -35,6 +35,7 @@ class Update extends Component
 
         Session::flash('success', 'Buku berhasil diperbarui');
         $this->dispatch('close-modal');
+
         return $this->redirectRoute('manage book');
     }
 
