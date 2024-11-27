@@ -27,15 +27,9 @@
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
           required="">
       </div>
-      <div class="flex items-center justify-end">
-        <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Lupa Password?</a>
-      </div>
       <button type="submit" class="w-full rounded-lg bg-primary-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">
         Login
       </button>
-      <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-        Belum punya akun? <a href="/register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register</a>
-      </p>
     </form>
   </x-slot>
 </x-auth.layout>

@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('role_id');
             $table->string('name')->unique();
             $table->string('username')->unique();
-            $table->string('phone_number')->unique();
             $table->string('password');
-            $table->softDeletes();
             $table->timestamps();
         });
 

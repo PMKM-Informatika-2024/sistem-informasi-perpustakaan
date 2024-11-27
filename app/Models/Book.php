@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -15,18 +14,11 @@ class Book extends Model
 
     protected $guarded = ['id'];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+    public $incrementing = false;
+    protected $keyType = "string";
 
-    public function scopeWithPaginate(Builder $query, int $perPage = 6)
+    public function loan()
     {
-        /**
-         * @var \Illuminate\Pagination\LengthAwarePaginator $result
-         */
-        $result = $query->paginate($perPage);
-
-        return $result->onEachSide(1)->withQueryString();
+        return $this->hasOne(Loan::class);
     }
 }

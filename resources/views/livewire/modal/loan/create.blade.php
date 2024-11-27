@@ -1,7 +1,7 @@
 <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
   <div class="flex items-center justify-between rounded-t border-b p-4 dark:border-gray-600 md:p-5">
     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-      Tambah Buku
+      Peminjaman Baru
     </h3>
     <button type="button" class="size-8 ms-auto inline-flex items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
       x-on:click="open = false">
@@ -14,20 +14,28 @@
   <form class="gap-4 p-4 md:p-5" wire:submit="create">
     <div class="space-y-4">
       <div>
-        <label for="code" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Kode Buku</label>
-        <input type="text" wire:model="code" id="code"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="741.5592" required>
-        @error('code')
+        <label for="member" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Member</label>
+        <select id="member" wire:model="member_id"
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+          <option selected disabled value="">Pilih Member</option>
+          @foreach ($members as $member)
+            <option wire:key="{{ $member->id }}" value="{{ $member->id }}">{{ Str::ucfirst($member->name) }}</option>
+          @endforeach
+        </select>
+        @error('user_id')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
       <div>
-        <label for="title" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Judul Buku</label>
-        <input type="text" wire:model="title" id="title"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="Doraemon" required>
-        @error('title')
+        <label for="book" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Buku</label>
+        <select id="book" wire:model="book_id"
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+          <option selected disabled value="">Pilih Buku</option>
+          @foreach ($books as $book)
+            <option wire:key="{{ $book->id }}" value="{{ $book->id }}">{{ $book->code }} - {{ Str::ucfirst($book->title) }}</option>
+          @endforeach
+        </select>
+        @error('book_id')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>

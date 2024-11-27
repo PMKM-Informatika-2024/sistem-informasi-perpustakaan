@@ -1,8 +1,11 @@
 <x-dashboard.layout :title="$title">
-  <livewire:book-table />
+  <livewire:member-table />
   <div>
-    <x-partial.modal name="create book">
-      <livewire:modal.book.create />
+    <x-partial.modal name="create user">
+      <livewire:modal.member.create />
+    </x-partial.modal>
+    <x-partial.modal name="delete specific">
+      <livewire:modal.member.delete />
     </x-partial.modal>
     <x-partial.modal name="delete all">
       <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
@@ -14,13 +17,13 @@
           </svg>
           <span class="sr-only">Close modal</span>
         </button>
-        <form action="{{ route('delete all book') }}" method="POST" class="p-4 text-center md:p-5">
+        <form action="{{ route('delete all user') }}" method="POST" class="p-4 text-center md:p-5">
           @csrf
           @method('DELETE')
           <svg class="mx-auto mb-4 h-12 w-12 text-gray-400 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
-          <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Hapus semua buku?</h3>
+          <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Yakin nih mau hapus semua data?</h3>
           <button type="submit" type="button" class="inline-flex items-center rounded-lg bg-red-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800">
             Yakin
           </button>
@@ -31,11 +34,8 @@
         </form>
       </div>
     </x-partial.modal>
-    <x-partial.modal name="delete book">
-      <livewire:modal.book.delete />
-    </x-partial.modal>
-    <x-partial.modal name="update book">
-      <livewire:modal.book.update />
+    <x-partial.modal name="update user">
+      <livewire:modal.member.update />
     </x-partial.modal>
   </div>
   <x-partial.toast type="success" />
