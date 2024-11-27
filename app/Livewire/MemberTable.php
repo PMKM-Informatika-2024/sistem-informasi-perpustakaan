@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire;
 
+use App\Models\Member;
 use Livewire\Component;
-use App\Models\Role;
-use App\Models\User;
 use Livewire\Attributes\Url;
 
 class MemberTable extends Component
@@ -14,11 +13,8 @@ class MemberTable extends Component
 
     public function render()
     {
-        return view('livewire.admin.member-table')->with([
-            "roles" => Role::all()->reject(function (Role $role) {
-                return $role->name === 'admin';
-            }),
-            "members" => User::where("name", "LIKE", "%{$this->keyword}%")->excludeAdmin()->latest()->get(),
+        return view('livewire.member-table')->with([
+            "members" => Member::all(),
         ]);
     }
 }

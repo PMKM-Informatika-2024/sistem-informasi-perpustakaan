@@ -1,5 +1,5 @@
 <x-dashboard.layout :title="$title">
-  <livewire:admin.member-table />
+  <livewire:member-table />
   <div>
     <x-partial.modal name="create user">
       <livewire:modal.member.create />
@@ -33,9 +33,6 @@
           </button>
         </form>
       </div>
-    </x-partial.modal>
-    <x-partial.modal name="role">
-      <livewire:modal.member.role />
     </x-partial.modal>
     <x-partial.modal name="update user">
       <livewire:modal.member.update />

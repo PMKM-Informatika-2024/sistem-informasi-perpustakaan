@@ -22,24 +22,6 @@
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
-      <div>
-        <label for="username" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Username</label>
-        <input type="text" wire:model="username" id="username"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="Udin Petot" required>
-        @error('name')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
-      <div>
-        <label for="phone_number" class="mb-2 block appearance-none text-sm font-medium text-gray-900 dark:text-white">No. HP</label>
-        <input type="tel" wire:model="phone_number" id="phone_number"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="081212121212" required>
-        @error('phone_number')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
       <div class="flex justify-end">
         <button type="submit" class="` inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700">
           <svg wire:loading.class="animate-spin" class="size-4 -ms-1 me-1 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

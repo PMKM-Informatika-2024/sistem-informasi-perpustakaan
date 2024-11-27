@@ -14,7 +14,6 @@
     <div class="flex items-center gap-3">
       <div>
         <p class="text-sm font-semibold text-gray-900 dark:text-white">{{ Auth::user()->name }}</p>
-        <p class="text-right text-sm text-gray-500 dark:text-gray-400">{{ Str::ucfirst(Auth::user()->role->name) }}</p>
       </div>
       <div>
         <img class="size-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">

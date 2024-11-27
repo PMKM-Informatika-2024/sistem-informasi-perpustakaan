@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -11,7 +11,7 @@ class MemberController
     {
         Session::put('menu', 'Manage Member');
 
-        return view('dashboard.admin.members', [
+        return view('dashboard.members', [
             'title' => 'Manage Member - Manajemen Perpustakaan',
         ]);
     }

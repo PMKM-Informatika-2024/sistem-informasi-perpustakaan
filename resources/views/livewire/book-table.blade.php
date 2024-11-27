@@ -34,28 +34,6 @@
           </svg>
           <span>Hapus Semua</span>
         </button>
-        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" data-dropdown-placement="bottom-end"
-          class="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:w-auto"
-          type="button">
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="size-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
-          </svg>
-          <span>Filter</span>
-          <svg class="size-4 -mr-1 ml-1.5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-          </svg>
-        </button>
-        <form id="filterDropdown" class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-gray-700">
-          <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
-            @foreach ($categories as $category)
-              <li class="flex items-center">
-                <input id="{{ $category->id }}" type="radio" {{ Request::get('category') === $category->slug ? 'checked' : '' }} name="category" onchange="this.form.submit()" value="{{ $category->slug }}"
-                  class="size-4 rounded-full border-gray-300 bg-gray-100 text-primary-600 focus:ring-0 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600">
-                <label for="{{ $category->id }}" class="ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-100">{{ Str::ucfirst($category->name) }} ({{ $category->books->count() }})</label>
-              </li>
-            @endforeach
-          </ul>
-        </form>
       </div>
     </div>
     <div class="overflow-x-auto">
@@ -81,12 +59,9 @@
         <table wire:loading.remove wire:target="keyword" class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-4 py-3">Kode</th>
+              <th scope="col" class="px-4 py-3">No</th>
+              <th scope="col" class="px-4 py-3">Kode Buku</th>
               <th scope="col" class="px-4 py-3">Judul Buku</th>
-              <th scope="col" class="px-4 py-3">Kategori</th>
-              <th scope="col" class="px-4 py-3">Pengarang</th>
-              <th scope="col" class="px-4 py-3">Penerbit</th>
-              <th scope="col" class="px-4 py-3">Tahun Terbit</th>
               <th scope="col" class="px-4 py-3">
                 <span class="sr-only">Actions</span>
               </th>
@@ -94,18 +69,11 @@
           </thead>
           <tbody>
             @foreach ($books as $book)
-              <tr wire:key="{{ $book->id }}" class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
+              <tr wire:key="{{ $book->id }}" class="border-b last:border-b-0 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $loop->iteration }}</td>
                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->code }}</td>
                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->title }}</td>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->category->name }}</td>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->author }}</td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
-                  {{ $book->publisher }}
-                </td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
-                  {{ $book->year }}
-                </td>
-                <td class="flex items-center justify-end px-4 py-3">
+                <td class="flex items-center justify-end px-4 py-2">
                   <button x-on:click="$dispatch('update', { id: '{{ $book->id }}' })" type="button"
                     class="me-2 inline-flex items-center gap-1.5 rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

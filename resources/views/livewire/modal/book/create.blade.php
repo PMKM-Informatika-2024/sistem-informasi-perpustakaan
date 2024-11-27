@@ -31,48 +31,6 @@
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
-      <div>
-        <label for="author" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Pengarang</label>
-        <input type="text" wire:model="author" id="author"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="Fujiko F Fujio" required>
-        @error('author')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
-      <div class="flex gap-4">
-        <div>
-          <label for="publisher" class="mb-2 block appearance-none text-sm font-medium text-gray-900 dark:text-white">Penerbit</label>
-          <input type="text" wire:model="publisher" id="publisher"
-            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-            placeholder="Gramedia" required>
-          @error('publisher')
-            <span class="text-sm text-red-400">{{ $message }}</span>
-          @enderror
-        </div>
-        <div>
-          <label for="year" class="mb-2 block appearance-none text-sm font-medium text-gray-900 dark:text-white">Tahun Terbit</label>
-          <input type="number" wire:model="year" id="year"
-            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-            placeholder="2002" required>
-          @error('year')
-            <span class="text-sm text-red-400">{{ $message }}</span>
-          @enderror
-        </div>
-      </div>
-      <div>
-        <label for="category_id" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-        <select id="category_id" wire:model="category_id"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-          <option selected disabled value="">Pilih Kategori</option>
-          @foreach ($categories as $category)
-            <option wire:key="{{ $category->id }}" {{ old('category_id') === $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
-          @endforeach
-        </select>
-        @error('category_id')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
     </div>
     <div class="flex justify-end">
       <button type="submit" class="mt-4 inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800">

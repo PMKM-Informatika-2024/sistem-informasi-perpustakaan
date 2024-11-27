@@ -23,12 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::if('role', function (string $value) {
-            return Str::of($value)->explode('|')->contains(function (string $value) {
-                return Auth::user()->role->name === $value;
-            });
-        });
-
         Carbon::setLocale('id_ID');
     }
 }

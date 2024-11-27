@@ -1,5 +1,5 @@
 <x-dashboard.layout :title="$title">
-  <livewire:karyawan.book.book-table />
+  <livewire:book-table />
   <div>
     <x-partial.modal name="create book">
       <livewire:modal.book.create />
