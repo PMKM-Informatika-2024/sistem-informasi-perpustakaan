@@ -42,8 +42,19 @@ class Update extends Component
     public function rules()
     {
         return [
-            'code' => ['required', 'string', 'max:255', Rule::unique('books', 'code')->ignore($this->book->id)],
+            'code' => ['required', 'string', Rule::unique('books', 'code')->ignore($this->book->id)],
             'title' => 'required|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'code.required' => 'Kode buku tidak boleh kosong',
+            'code.string' => 'Kode buku harus berupa string',
+            'code.unique' => 'Kode buku sudah ada',
+            'title.required' => 'Judul buku tidak boleh kosong',
+            'title.string' => 'Judul buku harus berupa string',
         ];
     }
 
