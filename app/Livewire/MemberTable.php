@@ -14,7 +14,7 @@ class MemberTable extends Component
     public function render()
     {
         return view('livewire.member-table')->with([
-            'members' => Member::all(),
+            'members' => Member::where('name', "LIKE", "%{$this->keyword}%")->get()
         ]);
     }
 }

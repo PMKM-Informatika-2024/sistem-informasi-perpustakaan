@@ -39,7 +39,16 @@ class Update extends Component
     public function rules()
     {
         return [
-            'name' => ['required', 'string', Rule::unique('users', 'name')->ignore($this->member->id)],
+            'name' => ['required', 'string', Rule::unique('members', 'name')->ignore($this->member->id)],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            "name.required" => "Nama tidak boleh kosong",
+            "name.string" => "Nama harus berupa huruf",
+            "name.unique" => "Member sudah ada"
         ];
     }
 
