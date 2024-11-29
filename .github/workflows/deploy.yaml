@@ -25,6 +25,7 @@ jobs:
             php artisan optimize:clear
             git pull origin main
             composer2 install
+            php artisan migrate:fresh --seed --force
             npm install
             npm run build
             php artisan optimize
