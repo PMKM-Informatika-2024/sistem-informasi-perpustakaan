@@ -66,7 +66,7 @@
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $loop->iteration }}</td>
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $loan->member->name }}</td>
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
-                  {{ $loan->book->title }}
+                  {{ $loan->book->code }} - {{ $loan->book->title }}
                 </td>
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
                   {{ $loan->created_at->translatedFormat('d F Y') }}
