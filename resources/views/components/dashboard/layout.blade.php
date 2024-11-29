@@ -7,7 +7,7 @@
     </div>
     <div class="max-h-dvh flex-1 overflow-y-scroll">
       <x-partial.navbar />
-      <div class="px-4">
+      <div class="p-4">
         {{ $slot }}
       </div>
     </div>
