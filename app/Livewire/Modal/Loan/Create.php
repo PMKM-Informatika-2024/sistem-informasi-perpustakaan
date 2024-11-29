@@ -36,7 +36,7 @@ class Create extends Component
     public function render()
     {
         return view('livewire.modal.loan.create')->with([
-            'books' => Book::whereDoesntHave('loan', fn(Builder $query) => $query->where('status', 0))->latest()->get(),
+            'books' => Book::whereDoesntHave('loan', fn (Builder $query) => $query->where('status', 0))->latest()->get(),
             'members' => Member::latest()->get(),
         ]);
     }

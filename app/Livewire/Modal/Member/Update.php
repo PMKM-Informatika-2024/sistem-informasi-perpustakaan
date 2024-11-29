@@ -46,9 +46,9 @@ class Update extends Component
     public function messages()
     {
         return [
-            "name.required" => "Nama tidak boleh kosong",
-            "name.string" => "Nama harus berupa huruf",
-            "name.unique" => "Member sudah ada"
+            'name.required' => 'Nama tidak boleh kosong',
+            'name.string' => 'Nama harus berupa huruf',
+            'name.unique' => 'Member sudah ada',
         ];
     }
 

@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
-    #[Validate(rule: "required", message: "Kode buku tidak boleh kosong")]
-    #[Validate(rule: "string", message: "Kode buku harus berupa string")]
-    #[Validate(rule: "unique:books,code", message: "Kode buku sudah ada")]
+    #[Validate(rule: 'required', message: 'Kode buku tidak boleh kosong')]
+    #[Validate(rule: 'string', message: 'Kode buku harus berupa string')]
+    #[Validate(rule: 'unique:books,code', message: 'Kode buku sudah ada')]
     public string $code;
 
-    #[Validate(rule: "required", message: "Judul buku tidak boleh kosong")]
-    #[Validate(rule: "string", message: "Judul buku harus berupa string")]
+    #[Validate(rule: 'required', message: 'Judul buku tidak boleh kosong')]
+    #[Validate(rule: 'string', message: 'Judul buku harus berupa string')]
     public string $title;
 
     public function create()

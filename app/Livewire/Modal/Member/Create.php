@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
-    #[Validate(rule: "required", message: 'Nama tidak boleh kosong')]
-    #[Validate(rule: "string", message: 'Nama harus berupa huruf')]
-    #[Validate(rule: "unique:members,name", message: 'Member sudah ada')]
+    #[Validate(rule: 'required', message: 'Nama tidak boleh kosong')]
+    #[Validate(rule: 'string', message: 'Nama harus berupa huruf')]
+    #[Validate(rule: 'unique:members,name', message: 'Member sudah ada')]
     public string $name;
 
     public function render()
