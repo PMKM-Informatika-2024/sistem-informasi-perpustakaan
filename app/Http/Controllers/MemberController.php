@@ -9,10 +9,10 @@ class MemberController
 {
     public function index()
     {
-        Session::put('menu', 'Manage Member');
+        Session::put('menu', 'Member');
 
         return view('dashboard.members', [
-            'title' => 'Manage Member - Manajemen Perpustakaan',
+            'title' => 'Member - Manajemen Perpustakaan',
         ]);
     }
 

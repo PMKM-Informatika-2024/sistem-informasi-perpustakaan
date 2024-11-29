@@ -1,4 +1,4 @@
-<div class="my-4 max-w-screen-2xl">
+<div class="max-w-screen-2xl">
   <div class="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
     <div class="flex flex-col space-y-3 p-4 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0">
       <div class="w-full md:w-1/2">
@@ -59,10 +59,16 @@
         <table wire:loading.remove wire:target="keyword" class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-4 py-3">No</th>
-              <th scope="col" class="px-4 py-3">Kode Buku</th>
-              <th scope="col" class="px-4 py-3">Judul Buku</th>
-              <th scope="col" class="px-4 py-3">
+              <th scope="col" class="px-4 py-2">Tanggal Masuk</th>
+              <th scope="col" class="px-4 py-2">Nomor Induk</th>
+              <th scope="col" class="px-4 py-2">Jumlah</th>
+              <th scope="col" class="px-4 py-2">Pengarang</th>
+              <th scope="col" class="px-4 py-2">Judul</th>
+              <th scope="col" class="px-4 py-2">Penerbit</th>
+              <th scope="col" class="px-4 py-2">Tahun Terbit</th>
+              <th scope="col" class="px-4 py-2">Sumber</th>
+              <th scope="col" class="px-4 py-2">Keterangan</th>
+              <th scope="col" class="px-4 py-2">
                 <span class="sr-only">Actions</span>
               </th>
             </tr>
@@ -70,12 +76,34 @@
           <tbody>
             @foreach ($books as $book)
               <tr wire:key="{{ $book->id }}" class="border-b last:border-b-0 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $loop->iteration }}</td>
+                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->created_at->translatedFormat('F Y') }}</td>
                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->code }}</td>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->title }}</td>
-                <td class="flex items-center justify-end px-4 py-2">
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->stock }}</td>
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+                  <ul class="list-disc">
+                    @foreach (Str::of($book->author)->explode(', ') as $author)
+                      <li>{{ $author }}</li>
+                    @endforeach
+                  </ul>
+                </td>
+                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
+                  {{ $book->title }}
+                </td>
+                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
+                  {{ $book->publisher }}
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+                  {{ $book->year }}
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+                  {{ $book->source }}
+                </td>
+                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
+                  {{ $book->description }}
+                </td>
+                <td class="flex flex-col gap-2.5 px-4 py-2">
                   <button x-on:click="$dispatch('update', { id: '{{ $book->id }}' })" type="button"
-                    class="me-2 inline-flex items-center gap-1.5 rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    class="mx-auto inline-flex items-center gap-1.5 rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"
                         d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z"
@@ -84,7 +112,7 @@
                     <span class="sr-only">Edit</span>
                   </button>
                   <button x-on:click="$dispatch('delete', { id: '{{ $book->id }}' })" type="button"
-                    class="me-2 inline-flex items-center gap-1.5 rounded-full bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    class="inline-flex items-center gap-1.5 rounded-full bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"
                         d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"

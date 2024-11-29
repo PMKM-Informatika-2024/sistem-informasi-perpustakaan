@@ -1,7 +1,7 @@
-<nav class="border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-800">
+<nav class="sticky top-0 z-50 border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-800">
   <div class="flex flex-wrap items-center justify-between">
-    <div>
-      <h1 class="text-3xl/none font-bold text-gray-100">{{ session('menu') }}</h1>
+    <div class="hidden lg:block">
+      <h1 class="text-3xl/none font-bold text-gray-100">{{ session('menu') ?? 'kontol' }}</h1>
     </div>
     <div class="flex items-center justify-start">
       <button aria-expanded="true" aria-controls="sidebar" data-drawer-target="sidebar" data-drawer-toggle="sidebar"
@@ -14,6 +14,7 @@
     <div class="flex items-center gap-3">
       <div>
         <p class="text-sm font-semibold text-gray-900 dark:text-white">{{ Auth::user()->name }}</p>
+        <p class="text-right text-sm font-semibold text-gray-900 dark:text-gray-400">{{ Auth::user()->username }}</p>
       </div>
       <div>
         <img class="size-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
