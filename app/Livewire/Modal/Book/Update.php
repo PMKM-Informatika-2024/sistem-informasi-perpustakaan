@@ -12,9 +12,14 @@ class Update extends Component
 {
     public ?Book $book = null;
 
-    public string $code;
 
+    public string $code;
+    public string $author;
     public string $title;
+    public string $publisher;
+    public string $year;
+    public string $source;
+    public string $description;
 
     #[On('update')]
     public function prepare(string $id)
@@ -22,7 +27,12 @@ class Update extends Component
         $this->book = Book::findOrFail($id);
 
         $this->code = $this->book->code;
+        $this->author = $this->book->author;
         $this->title = $this->book->title;
+        $this->publisher = $this->book->publisher;
+        $this->year = $this->book->year;
+        $this->source = $this->book->source;
+        $this->description = $this->book->description;
 
         $this->dispatch('open-modal', modal: 'update book');
     }
@@ -43,7 +53,12 @@ class Update extends Component
     {
         return [
             'code' => ['required', 'string', Rule::unique('books', 'code')->ignore($this->book->id)],
+            'author' => 'required|string',
             'title' => 'required|string',
+            'publisher' => 'required|string',
+            'year' => 'required',
+            'source' => 'required',
+            'description' => 'required',
         ];
     }
 
