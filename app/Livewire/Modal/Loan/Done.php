@@ -24,7 +24,7 @@ class Done extends Component
         $this->loan->update(['status' => 1]);
 
         $book = $this->loan->book;
-        $book->update(["stock" => $book->stock + 1]);
+        $book->update(['stock' => $book->stock + 1]);
 
         Session::flash('success', 'Peminjaman berhasil diselesaikan');
         $this->dispatch('close-modal');

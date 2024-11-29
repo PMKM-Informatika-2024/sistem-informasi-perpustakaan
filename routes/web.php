@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::get('/profile', [DashboardController::class, "edit"])->name('edit profile');
-    Route::put('/profile', [DashboardController::class, "update"])->name('update profile');
+    Route::get('/profile', [DashboardController::class, 'edit'])->name('edit profile');
+    Route::put('/profile', [DashboardController::class, 'update'])->name('update profile');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

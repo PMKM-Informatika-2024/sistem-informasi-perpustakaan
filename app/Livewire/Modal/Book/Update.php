@@ -12,13 +12,18 @@ class Update extends Component
 {
     public ?Book $book = null;
 
-
     public string $code;
+
     public string $author;
+
     public string $title;
+
     public string $publisher;
+
     public string $year;
+
     public string $source;
+
     public string $description;
 
     #[On('update')]
