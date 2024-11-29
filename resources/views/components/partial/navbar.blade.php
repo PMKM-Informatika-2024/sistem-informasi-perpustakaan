@@ -1,4 +1,4 @@
-<nav class="border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-800">
+<nav class="sticky top-0 z-50 border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-800">
   <div class="flex flex-wrap items-center justify-between">
     <div class="flex items-center justify-start">
       <button aria-expanded="true" aria-controls="sidebar" data-drawer-target="sidebar" data-drawer-toggle="sidebar"
