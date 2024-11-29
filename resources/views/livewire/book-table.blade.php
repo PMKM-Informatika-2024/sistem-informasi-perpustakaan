@@ -101,7 +101,7 @@
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
                   {{ $book->description }}
                 </td>
-                <td class="flex flex-col gap-2 px-4 py-2">
+                <td class="flex flex-col gap-2.5 px-4 py-2">
                   <button x-on:click="$dispatch('update', { id: '{{ $book->id }}' })" type="button"
                     class="mx-auto inline-flex items-center gap-1.5 rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
