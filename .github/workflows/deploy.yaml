@@ -19,6 +19,9 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd ${{ secrets.DIR }}
+            nvm use 22
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             php artisan optimize:clear
             git pull origin main
             composer2 install
