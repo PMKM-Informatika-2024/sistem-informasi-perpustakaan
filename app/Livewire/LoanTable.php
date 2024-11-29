@@ -10,7 +10,7 @@ class LoanTable extends Component
     public function render()
     {
         return view('livewire.loan-table')->with([
-            'loans' => Loan::all(),
+            'loans' => Loan::with(['book', 'member'])->latest()->get()
         ]);
     }
 }
