@@ -9,10 +9,10 @@ class BookController
 {
     public function index()
     {
-        Session::flash('menu', 'Manage Buku');
+        Session::flash('menu', 'Buku');
 
         return view('dashboard.books', [
-            'title' => 'Manage Book - Manajemen Perpustakaan',
+            'title' => 'Buku - Manajemen Perpustakaan',
         ]);
     }
 
