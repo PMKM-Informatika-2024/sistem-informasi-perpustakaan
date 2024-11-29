@@ -21,9 +21,10 @@ class Done extends Component
 
     public function done()
     {
-        $this->loan->update([
-            'status' => 1,
-        ]);
+        $this->loan->update(['status' => 1]);
+
+        $book = $this->loan->book;
+        $book->update(["stock" => $book->stock + 1]);
 
         Session::flash('success', 'Peminjaman berhasil diselesaikan');
         $this->dispatch('close-modal');
