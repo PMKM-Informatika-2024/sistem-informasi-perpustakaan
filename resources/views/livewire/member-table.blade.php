@@ -1,4 +1,4 @@
-<div class="my-4 max-w-screen-2xl">
+<div class="max-w-screen-2xl">
   <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
     <div class="flex flex-col space-y-3 p-4 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0">
       <div class="w-full md:w-1/2">
