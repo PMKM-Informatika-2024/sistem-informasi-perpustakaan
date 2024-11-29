@@ -17,7 +17,7 @@
         <p class="text-right text-sm font-semibold text-gray-900 dark:text-gray-400">{{ Auth::user()->username }}</p>
       </div>
       <div>
-        <img class="size-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+        <img class="size-10 rounded-full" src="{{ asset('image/profile.webp') }}" alt="{{ Auth::user()->name }}">
       </div>
     </div>
   </div>
