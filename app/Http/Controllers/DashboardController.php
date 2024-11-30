@@ -22,7 +22,7 @@ class DashboardController
             'title' => 'Dashboard - Manajemen Perpustakaan',
             'members' => Member::all(),
             'books' => Book::all(),
-            'loans' => Loan::where('status', 1)->get(),
+            'loans' => Loan::where('status', 0)->get(),
         ]);
     }
 

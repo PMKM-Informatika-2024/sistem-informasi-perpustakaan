@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Member;
 use Illuminate\Support\Facades\Session;
 
 class MemberController
@@ -18,7 +18,7 @@ class MemberController
 
     public function deleteAll()
     {
-        User::excludeAdmin()->delete();
+        Member::all()->each(fn (Member $member) => $member->delete());
 
         return back()->with('success', 'Semua member berhasil dihapus');
     }

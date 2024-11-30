@@ -39,7 +39,7 @@ class Update extends Component
     public function rules()
     {
         return [
-            'name' => ['required', 'string', Rule::unique('members', 'name')->ignore($this->member->id)],
+            'name' => ['required', 'string', Rule::unique('members', 'name')->ignore($this->member->id)->whereNull('deleted_at')],
         ];
     }
 

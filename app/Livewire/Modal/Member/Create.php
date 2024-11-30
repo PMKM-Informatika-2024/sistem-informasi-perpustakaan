@@ -4,15 +4,12 @@ namespace App\Livewire\Modal\Member;
 
 use App\Models\Member;
 use Livewire\Component;
-use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
-    #[Validate(rule: 'required', message: 'Nama tidak boleh kosong')]
-    #[Validate(rule: 'string', message: 'Nama harus berupa huruf')]
-    #[Validate(rule: 'unique:members,name', message: 'Member sudah ada')]
     public string $name;
 
     public function render()
@@ -33,5 +30,12 @@ class Create extends Component
         $this->dispatch('close-modal');
 
         return $this->redirectRoute('manage user');
+    }
+
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'string', Rule::unique('members', 'name')->whereNull('deleted_at')],
+        ];
     }
 }

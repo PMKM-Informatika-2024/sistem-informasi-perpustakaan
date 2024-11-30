@@ -57,7 +57,7 @@ class Update extends Component
     public function rules()
     {
         return [
-            'code' => ['required', 'string', Rule::unique('books', 'code')->ignore($this->book->id)],
+            'code' => ['required', 'string', Rule::unique('books', 'code')->ignore($this->book->id)->whereNull('deleted_at')],
             'author' => 'required|string',
             'title' => 'required|string',
             'publisher' => 'required|string',
