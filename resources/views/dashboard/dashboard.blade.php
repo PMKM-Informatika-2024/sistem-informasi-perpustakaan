@@ -28,7 +28,4 @@
       <p class="font-normal text-gray-500 dark:text-gray-400">{{ $loans->count() }}</p>
     </div>
   </div>
-  <div class="mt-4">
-    <h1>saran cuy isi apa disini???</h1>
-  </div>
 </x-dashboard.layout>
