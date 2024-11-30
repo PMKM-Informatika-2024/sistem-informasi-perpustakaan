@@ -4,9 +4,9 @@ namespace App\Livewire\Modal\Member;
 
 use App\Models\Member;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Validation\Rule;
 
 class Create extends Component
 {

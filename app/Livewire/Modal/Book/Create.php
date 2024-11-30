@@ -4,8 +4,8 @@ namespace App\Livewire\Modal\Book;
 
 use App\Models\Book;
 use Livewire\Component;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {

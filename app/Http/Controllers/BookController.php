@@ -18,7 +18,7 @@ class BookController
 
     public function deleteAll()
     {
-        Book::all()->each(fn(Book $book) => $book->delete());
+        Book::all()->each(fn (Book $book) => $book->delete());
 
         return back()->with('success', 'Semua buku berhasil dihapus');
     }
