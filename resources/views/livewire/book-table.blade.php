@@ -64,6 +64,7 @@
               <th scope="col" class="px-4 py-2">Jumlah</th>
               <th scope="col" class="px-4 py-2">Pengarang</th>
               <th scope="col" class="px-4 py-2">Judul</th>
+              <th scope="col" class="px-4 py-2">Kategori</th>
               <th scope="col" class="px-4 py-2">Penerbit</th>
               <th scope="col" class="px-4 py-2">Tahun Terbit</th>
               <th scope="col" class="px-4 py-2">Sumber</th>
@@ -77,8 +78,8 @@
             @foreach ($books as $book)
               <tr wire:key="{{ $book->id }}" class="border-b last:border-b-0 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->created_at->translatedFormat('F Y') }}</td>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->code }}</td>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->stock }}</td>
+                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->code }}</td>
+                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->stock }}/{{ $book->initial }}</td>
                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
                   <ul class="list-disc">
                     @foreach (Str::of($book->author)->explode(', ') as $author)
@@ -88,6 +89,9 @@
                 </td>
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
                   {{ $book->title }}
+                </td>
+                <td class="=py-2 px-4 font-medium text-gray-900 dark:text-white">
+                  {{ $book->category->name }}
                 </td>
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
                   {{ $book->publisher }}
