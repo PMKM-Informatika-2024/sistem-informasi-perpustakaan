@@ -19,7 +19,8 @@
         </a>
       </li>
       <li>
-        <a href="{{ route('manage user') }}" class="group flex w-full items-center rounded-lg p-2 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+        <a href="{{ route('manage user') }}"
+          class="{{ Request::is('dashboard/members') ? 'bg-gray-700' : '' }} group flex w-full items-center rounded-lg p-2 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
           <svg class="size-6 flex-shrink-0 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
@@ -30,16 +31,35 @@
         </a>
       </li>
       <li>
-        <a href="{{ route('manage book') }}" class="group flex w-full items-center rounded-lg p-2 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+        <button type="button" class="group flex w-full items-center rounded-lg p-2 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-pages"
+          data-collapse-toggle="dropdown-book">
           <svg class="size-6 flex-shrink-0 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd" />
           </svg>
           <span class="ml-3 flex-1 whitespace-nowrap text-left">Data Buku</span>
-        </a>
+          <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+        <ul id="dropdown-book" class="{{ Request::is('dashboard/books*') ? '' : 'hidden' }} space-y-2 py-2">
+          <li>
+            <a href="{{ route('manage category') }}"
+              class="{{ Request::is('dashboard/books/categories') ? 'bg-gray-700' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              Kategori Buku
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('manage book') }}"
+              class="{{ Request::is('dashboard/books') ? 'bg-gray-700' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              Kumpulan Buku
+            </a>
+          </li>
+        </ul>
       </li>
       <li>
-        <a href="{{ route('manage peminjaman') }}" class="group flex items-center rounded-lg p-2 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+        <a href="{{ route('manage peminjaman') }}"
+          class="{{ Request::is('dashboard/peminjaman') ? 'bg-gray-700' : '' }} group flex items-center rounded-lg p-2 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
           <svg class="size-6 flex-shrink-0 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
@@ -64,7 +84,7 @@
       </li>
       <li>
         <button type="button" class="group flex w-full items-center rounded-lg p-2 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-pages"
-          data-collapse-toggle="dropdown-pages">
+          data-collapse-toggle="dropdown-setting">
           <svg class="size-6 ml-0.5 flex-shrink-0 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
             height="24" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
@@ -76,7 +96,7 @@
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
           </svg>
         </button>
-        <ul id="dropdown-pages" class="{{ Request::is('profile/*') ? '' : 'hidden' }} space-y-2 py-2">
+        <ul id="dropdown-setting" class="{{ Request::is('profile/*') ? '' : 'hidden' }} space-y-2 py-2">
           <li>
             <a href="{{ route('edit profile') }}"
               class="{{ Request::is('profile/general') ? 'bg-gray-700' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Informasi
