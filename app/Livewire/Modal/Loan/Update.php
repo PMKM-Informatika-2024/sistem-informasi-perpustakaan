@@ -2,25 +2,25 @@
 
 namespace App\Livewire\Modal\Loan;
 
-use App\Models\Loan;
 use App\Models\Book;
+use App\Models\Loan;
 use App\Models\Member;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Session;
 
 class Update extends Component
 {
     public ?Loan $loan = null;
 
-    #[Validate(rule: "required|exists:members,id")]
+    #[Validate(rule: 'required|exists:members,id')]
     public string $member_id = '';
 
-    #[Validate(rule: "required|exists:books,id")]
+    #[Validate(rule: 'required|exists:books,id')]
     public string $book_id = '';
 
-    #[On("update")]
+    #[On('update')]
     public function prepare(string $id)
     {
         $this->loan = Loan::findOrFail($id);
@@ -28,7 +28,7 @@ class Update extends Component
         $this->member_id = $this->loan->member_id;
         $this->book_id = $this->loan->book_id;
 
-        $this->dispatch("open-modal", modal: "update peminjaman");
+        $this->dispatch('open-modal', modal: 'update peminjaman');
     }
 
     public function update()
@@ -37,10 +37,10 @@ class Update extends Component
 
         $this->loan->update($data);
 
-        Session::flash("success", "Peminjaman berhasil diupdate");
-        $this->dispatch("close-modal");
+        Session::flash('success', 'Peminjaman berhasil diupdate');
+        $this->dispatch('close-modal');
 
-        return $this->redirectRoute("manage peminjaman");
+        return $this->redirectRoute('manage peminjaman');
     }
 
     public function render()

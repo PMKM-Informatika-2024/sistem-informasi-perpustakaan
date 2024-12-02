@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Modal\Category;
 
-use App\Models\Category;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
@@ -19,9 +19,9 @@ class Create extends Component
         Category::create($data);
 
         Session::flash('success', 'Kategori berhasil ditambahkan.');
-        $this->dispatch("close-modal");
+        $this->dispatch('close-modal');
 
-        return $this->redirectRoute("manage category");
+        return $this->redirectRoute('manage category');
     }
 
     public function render()

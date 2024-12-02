@@ -9,18 +9,18 @@ class CategoryController
 {
     public function index()
     {
-        Session::put("menu", "Kategori");
+        Session::put('menu', 'Kategori');
 
-        return view("dashboard.category", [
-            "title" => "Kategori - Manajemen Perpustakaan",
-            "categories" => Category::all()
+        return view('dashboard.category', [
+            'title' => 'Kategori - Manajemen Perpustakaan',
+            'categories' => Category::all(),
         ]);
     }
 
     public function deleteAll()
     {
-        Category::all()->each(fn(Category $category) => $category->delete());
+        Category::all()->each(fn (Category $category) => $category->delete());
 
-        return back()->with("success", "Semua kategori berhasil dihapus");
+        return back()->with('success', 'Semua kategori berhasil dihapus');
     }
 }

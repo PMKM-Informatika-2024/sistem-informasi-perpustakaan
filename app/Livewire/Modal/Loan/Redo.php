@@ -2,31 +2,31 @@
 
 namespace App\Livewire\Modal\Loan;
 
+use App\Models\Loan;
 use Livewire\Component;
 use Livewire\Attributes\On;
-use App\Models\Loan;
 use Illuminate\Support\Facades\Session;
 
 class Redo extends Component
 {
     public ?Loan $loan = null;
 
-    #[On("redo")]
+    #[On('redo')]
     public function prepare(string $id)
     {
         $this->loan = Loan::findOrFail($id);
 
-        $this->dispatch("open-modal", modal: "redo");
+        $this->dispatch('open-modal', modal: 'redo');
     }
 
     public function redo()
     {
-        $this->loan->update(["status" => 0]);
+        $this->loan->update(['status' => 0]);
 
-        Session::flash("success", "Belum Diselesaikan");
-        $this->dispatch("close-modal");
+        Session::flash('success', 'Belum Diselesaikan');
+        $this->dispatch('close-modal');
 
-        return $this->redirectRoute("manage peminjaman");
+        return $this->redirectRoute('manage peminjaman');
     }
 
     public function render()
