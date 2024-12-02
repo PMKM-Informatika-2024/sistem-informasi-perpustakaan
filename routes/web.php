@@ -41,12 +41,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/website', [WebsiteController::class, 'index'])->name('edit website');
     Route::put('/website', [WebsiteController::class, 'update'])->name('update website');
 
-    Route::prefix("/profile")->group(function () {
-        Route::get("/general", [ProfileController::class, "index"])->name("edit profile");
-        Route::put("/general", [ProfileController::class, "update"])->name("update profile");
+    Route::prefix('/profile')->group(function () {
+        Route::get('/general', [ProfileController::class, 'index'])->name('edit profile');
+        Route::put('/general', [ProfileController::class, 'update'])->name('update profile');
 
-        Route::get("/credentials", [LoginController::class, "edit"])->name("edit credentials");
-        Route::put("/credentials", [LoginController::class, "update"])->name("update credentials");
+        Route::get('/credentials', [LoginController::class, 'edit'])->name('edit credentials');
+        Route::put('/credentials', [LoginController::class, 'update'])->name('update credentials');
     });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

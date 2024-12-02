@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rules\File;
 
 class ProfileController
 {
@@ -26,23 +26,23 @@ class ProfileController
         $path = null;
 
         $data = $request->validate([
-            "avatar" => ['nullable', File::image()->max("2mb")],
+            'avatar' => ['nullable', File::image()->max('2mb')],
             'name' => 'required',
         ]);
 
-        if ($request->hasFile("avatar")) {
+        if ($request->hasFile('avatar')) {
             $oldAvatar = Auth::user()->avatar;
 
             if ($oldAvatar) {
                 Storage::delete($oldAvatar);
             }
 
-            $path = $request->file("avatar")->store("avatar");
+            $path = $request->file('avatar')->store('avatar');
         }
 
         User::where('id', Auth::id())->update([
-            "name" => $data['name'],
-            "avatar" => $path
+            'name' => $data['name'],
+            'avatar' => $path,
         ]);
 
         return back()->with('success', 'Profile berhasil diubah');

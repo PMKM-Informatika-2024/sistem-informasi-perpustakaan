@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Facades\Hash;
 
 class LoginController
 {
@@ -47,16 +47,16 @@ class LoginController
     public function update(Request $request)
     {
         $data = $request->validate([
-            "username" => "nullable|string",
-            "password" => ["required", "confirmed", Password::min(8)->letters()->numbers()],
+            'username' => 'nullable|string',
+            'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
         ]);
 
-        User::query()->where("id", Auth::id())->update([
+        User::query()->where('id', Auth::id())->update([
             ...$data,
-            "password" => Hash::make($data["password"]),
+            'password' => Hash::make($data['password']),
         ]);
 
-        return back()->with("success", "Informasi Login berhasil diubah");
+        return back()->with('success', 'Informasi Login berhasil diubah');
     }
 
     public function logout()
