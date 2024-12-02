@@ -49,13 +49,13 @@
         <table wire:loading.remove wire:target="keyword" class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-4 py-3">No</th>
-              <th scope="col" class="px-4 py-3">Peminjam</th>
-              <th scope="col" class="px-4 py-3">Dipinjam</th>
-              <th scope="col" class="px-4 py-3">Tanggal Pinjam</th>
-              <th scope="col" class="px-4 py-3">Status</th>
-              <th scope="col" class="px-4 py-3">Tanggal Balik</th>
-              <th scope="col" class="px-4 py-3">
+              <th scope="col" class="px-4 py-2">No</th>
+              <th scope="col" class="px-4 py-2">Peminjam</th>
+              <th scope="col" class="px-4 py-2">Dipinjam</th>
+              <th scope="col" class="px-4 py-2">Tanggal Pinjam</th>
+              <th scope="col" class="px-4 py-2">Status</th>
+              <th scope="col" class="px-4 py-2">Tanggal Balik</th>
+              <th scope="col" class="px-4 py-2">
                 <span class="sr-only">Actions</span>
               </th>
             </tr>
@@ -77,12 +77,29 @@
                 <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
                   {{ $loan->status ? $loan->updated_at->translatedFormat('d F Y') : '-' }}
                 </td>
-                <td class="flex items-center justify-end px-4 py-3">
+                <td class="flex items-center justify-end px-4 py-2">
                   @if (!$loan->status)
+                    <button type="button" x-on:click="$dispatch('update', { id: '{{ $loan->id }}' })"
+                      class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                          d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z"
+                          clip-rule="evenodd" />
+                      </svg>
+                      <span class="sr-only">Edit</span>
+                    </button>
                     <button x-data x-on:click="$dispatch('done', { id: '{{ $loan->id }}' })" type="button"
                       class="me-2 inline-flex items-center gap-1.5 rounded-full bg-green-700 p-2.5 text-center text-sm font-medium text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700">
                       <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                      </svg>
+                      <span class="sr-only">Done</span>
+                    </button>
+                  @else
+                    <button x-data x-on:click="$dispatch('redo', { id: '{{ $loan->id }}' })" type="button"
+                      class="me-2 inline-flex items-center gap-1.5 rounded-full bg-yellow-700 p-2.5 text-center text-sm font-medium text-white hover:bg-yellow-800 dark:bg-yellow-600 dark:hover:bg-yellow-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 text-gray-800 dark:text-white">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                       </svg>
                       <span class="sr-only">Done</span>
                     </button>

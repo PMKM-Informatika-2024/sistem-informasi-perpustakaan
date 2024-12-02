@@ -23,7 +23,7 @@ class Create extends Component
 
         Loan::create([...$data, 'status' => 0]);
 
-        $book = Book::query()->findOrFail($this->book_id);
+        $book = Book::findOrFail($this->book_id);
         $book->update(['stock' => $book->stock - 1]);
 
         Session::flash('success', 'Peminjaman berhasil ditambahkan');
@@ -35,7 +35,7 @@ class Create extends Component
     public function render()
     {
         return view('livewire.modal.loan.create')->with([
-            'books' => Book::query()->where('stock', '>', 0)->latest()->get(),
+            'books' => Book::where('stock', '>', 0)->latest()->get(),
             'members' => Member::latest()->get(),
         ]);
     }
