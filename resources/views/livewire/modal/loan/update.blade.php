@@ -22,7 +22,7 @@
             <option wire:key="{{ $member->id }}" value="{{ $member->id }}">{{ Str::ucfirst($member->name) }}</option>
           @endforeach
         </select>
-        @error('user_id')
+        @error('member_id')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
