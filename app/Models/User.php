@@ -16,9 +16,9 @@ class User extends Authenticatable
 
     protected $hidden = ['password'];
 
-    protected $keyType = 'string';
-
     public $incrementing = false;
+
+    protected $keyType = 'string';
 
     protected function casts(): array
     {
