@@ -14,7 +14,7 @@
   <form class="gap-4 p-4 md:p-5" wire:submit="create">
     <div class="space-y-4">
       <div>
-        <label for="member" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Member</label>
+        <label for="member" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Member</label>
         <select id="member" wire:model="member_id"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
           <option selected disabled value="">Pilih Member</option>
@@ -27,7 +27,7 @@
         @enderror
       </div>
       <div>
-        <label for="book" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Buku</label>
+        <label for="book" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Buku</label>
         <select id="book" wire:model="book_id"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
           <option selected disabled value="">Pilih Buku</option>

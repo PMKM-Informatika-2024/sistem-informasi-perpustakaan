@@ -3,10 +3,7 @@
 @section('content')
   <div class="h-dvh lg:flex">
     <div class="h-56 w-full lg:h-full lg:w-2/5">
-      <picture>
-        <source media="(min-width: 1024px)" srcset="{{ asset('image/login.webp') }}">
-        <img src="{{ asset('image/login2.webp') }}" alt="Login Image" class="size-full object-cover object-center">
-      </picture>
+      <img src="{{ $image ? asset('storage/' . $image) : asset('image/login2.webp') }}" alt="Login Image" class="size-full object-cover object-center">
     </div>
     <div class="grid w-full place-items-center lg:w-3/5">
       <div class="w-full rounded-lg bg-white shadow dark:border dark:border-gray-700 dark:bg-gray-950 lg:mt-0 lg:max-w-xl lg:p-0">
@@ -27,13 +24,13 @@
             @endsession
             @csrf
             <div>
-              <label for="username" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Username</label>
+              <label for="username" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Username</label>
               <input type="text" name="username" id="username"
                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="akunkeren" required="" value="{{ old('username') }}">
             </div>
             <div>
-              <label for="password" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Password</label>
+              <label for="password" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Password</label>
               <input type="password" name="password" id="password" placeholder="••••••••"
                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 required="">

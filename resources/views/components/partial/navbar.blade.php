@@ -17,7 +17,7 @@
         <p class="text-right text-sm font-semibold text-gray-900 dark:text-gray-400">{{ Auth::user()->username }}</p>
       </div>
       <div>
-        <img class="size-10 rounded-full" src="{{ asset('image/profile.webp') }}" alt="{{ Auth::user()->name }}">
+        <img class="size-10 rounded-full" src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('image/profile.webp') }}" alt="{{ Auth::user()->name }}">
       </div>
     </div>
   </div>

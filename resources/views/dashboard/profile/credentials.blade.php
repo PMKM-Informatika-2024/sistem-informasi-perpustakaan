@@ -1,27 +1,11 @@
 <x-dashboard.layout :title="$title">
   <div class="max-w-screen-sm">
-    <form action="{{ route('update profile') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('update credentials') }}" method="POST">
       @csrf
       @method('PUT')
-      <div class="border-b border-white">
-        <h2 class="text-3xl font-semibold text-white">Informasi Umum</h2>
-        <div class="mt-2">
-          <div>
-            <label for="avatar_input" class="mb-1 block text-sm font-medium text-gray-900 dark:text-gray-200">Foto Profil</label>
-            <img src="{{ asset('image/profile.webp') }}" alt="Avatar" id="avatar" class="size-36 mb-4">
-            <input type="file" name="avatar" id="avatar_input" class="rounded-lg file:rounded-lg">
-          </div>
-          <div class="my-4">
-            <label for="name" class="mb-1 block text-sm font-medium text-gray-900 dark:text-gray-200">Nama Lengkap</label>
-            <input type="text" name="name" id="name"
-              class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-              value="{{ $user->name }}" placeholder="nama" required>
-          </div>
-        </div>
-      </div>
-      <div class="mt-4">
+      <div>
         <h2 class="text-3xl font-semibold text-white">Informasi Login</h2>
-        <div class="mb-4 mt-2 w-full">
+        <div class="my-4 w-full">
           <div>
             <label for="username" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Username</label>
             <input type="text" name="username" id="username"

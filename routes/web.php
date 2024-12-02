@@ -5,6 +5,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoanController;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -36,7 +38,16 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::get('/profile', [DashboardController::class, 'edit'])->name('edit profile');
-    Route::put('/profile', [DashboardController::class, 'update'])->name('update profile');
+    Route::get('/website', [WebsiteController::class, 'index'])->name('edit website');
+    Route::put('/website', [WebsiteController::class, 'update'])->name('update website');
+
+    Route::prefix("/profile")->group(function () {
+        Route::get("/general", [ProfileController::class, "index"])->name("edit profile");
+        Route::put("/general", [ProfileController::class, "update"])->name("update profile");
+
+        Route::get("/credentials", [LoginController::class, "edit"])->name("edit credentials");
+        Route::put("/credentials", [LoginController::class, "update"])->name("update credentials");
+    });
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
