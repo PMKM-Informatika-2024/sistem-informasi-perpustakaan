@@ -3,6 +3,7 @@
 namespace App\Livewire\Modal\Book;
 
 use App\Models\Book;
+use App\Models\Category;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Session;
 class Update extends Component
 {
     public ?Book $book = null;
+
+    public string $category_id = '';
 
     public string $code;
 
@@ -31,6 +34,7 @@ class Update extends Component
     {
         $this->book = Book::findOrFail($id);
 
+        $this->category_id = $this->book->category_id;
         $this->code = $this->book->code;
         $this->author = $this->book->author;
         $this->title = $this->book->title;
@@ -57,6 +61,7 @@ class Update extends Component
     public function rules()
     {
         return [
+            "category_id" => "required|exists:categories,id",
             'code' => ['required', 'string', Rule::unique('books', 'code')->ignore($this->book->id)->whereNull('deleted_at')],
             'author' => 'required|string',
             'title' => 'required|string',
@@ -80,6 +85,8 @@ class Update extends Component
 
     public function render()
     {
-        return view('livewire.modal.book.update');
+        return view('livewire.modal.book.update')->with([
+            "categories" => Category::all()
+        ]);
     }
 }
