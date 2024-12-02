@@ -18,6 +18,11 @@ class Book extends Model
 
     protected $keyType = 'string';
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class)->withTrashed();
+    }
+
     public function loan()
     {
         return $this->hasOne(Loan::class);
