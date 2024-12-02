@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return Response::redirectTo('/login');
@@ -31,6 +32,11 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/books')->group(function () {
             Route::get('/', [BookController::class, 'index'])->name('manage book');
             Route::delete('/delete-all', [BookController::class, 'deleteAll'])->name('delete all book');
+
+            Route::prefix("/categories")->group(function () {
+                Route::get("/", [CategoryController::class, "index"])->name("manage category");
+                Route::delete("/delete-all", [CategoryController::class, "deleteAll"])->name("delete all category");
+            });
         });
 
         Route::prefix('/peminjaman')->group(function () {
