@@ -3,12 +3,15 @@
 namespace App\Livewire\Modal\Book;
 
 use App\Models\Book;
+use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
+    public string $category_id = '';
+
     public string $code;
 
     public string $stock;
@@ -28,6 +31,7 @@ class Create extends Component
     public function rules()
     {
         return [
+            "category_id" => ["required", "exists:categories,id"],
             'code' => ['required', 'string', Rule::unique('books', 'code')->whereNull('deleted_at')],
             'stock' => 'required|integer',
             'author' => 'required',
@@ -35,7 +39,7 @@ class Create extends Component
             'publisher' => 'required',
             'year' => 'required',
             'source' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
         ];
     }
 
@@ -43,7 +47,7 @@ class Create extends Component
     {
         $data = $this->validate();
 
-        Book::create($data);
+        Book::create([...$data, 'initial' => $data["stock"]]);
 
         Session::flash('success', 'Buku berhasil ditambahkan');
         $this->dispatch('close-modal');
@@ -53,6 +57,8 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.modal.book.create');
+        return view('livewire.modal.book.create')->with([
+            "categories" => Category::all(),
+        ]);
     }
 }
