@@ -1,4 +1,4 @@
-name: Deploy to Production
+name: Deploy to Preview
 on:
   workflow_run:
     workflows: [Linting]
@@ -6,7 +6,7 @@ on:
       - completed
 jobs:
   deploy:
-    name: Deploy to Production
+    name: Deploy to Preview
     runs-on: ubuntu-latest
     environment: Preview
     steps:
