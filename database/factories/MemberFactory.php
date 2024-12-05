@@ -10,7 +10,7 @@ class MemberFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            "phone_number" => fake()->e164PhoneNumber(),
+            'phone_number' => fake()->e164PhoneNumber(),
         ];
     }
 }

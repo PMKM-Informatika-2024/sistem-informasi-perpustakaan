@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 class Create extends Component
 {
     public string $name;
+
     public string $phone_number;
 
     public function render()
@@ -33,14 +34,14 @@ class Create extends Component
     {
         return [
             'name' => ['required', 'string', Rule::unique('members', 'name')->whereNull('deleted_at')],
-            "phone_number" => ["required", 'phone:ID', Rule::unique('members', 'phone_number')->whereNull('deleted_at')],
+            'phone_number' => ['required', 'phone:ID', Rule::unique('members', 'phone_number')->whereNull('deleted_at')],
         ];
     }
 
     public function messages()
     {
         return [
-            'phone' => 'The :attribute field must be a valid number'
+            'phone' => 'The :attribute field must be a valid number',
         ];
     }
 }
