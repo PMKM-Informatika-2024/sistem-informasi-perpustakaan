@@ -5,12 +5,12 @@ namespace App\Livewire\Modal\Member;
 use App\Models\Member;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class Create extends Component
 {
     public string $name;
+    public string $phone_number;
 
     public function render()
     {
@@ -21,10 +21,7 @@ class Create extends Component
     {
         $data = $this->validate();
 
-        Member::create([
-            ...$data,
-            'password' => Hash::make(config('env.secret')),
-        ]);
+        Member::create($data);
 
         Session::flash('success', 'Member berhasil ditambahkan');
         $this->dispatch('close-modal');
@@ -36,6 +33,14 @@ class Create extends Component
     {
         return [
             'name' => ['required', 'string', Rule::unique('members', 'name')->whereNull('deleted_at')],
+            "phone_number" => ["required", 'phone:ID', Rule::unique('members', 'phone_number')->whereNull('deleted_at')],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'phone' => 'The :attribute field must be a valid number'
         ];
     }
 }

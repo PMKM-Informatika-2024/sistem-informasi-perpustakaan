@@ -13,6 +13,7 @@ class Update extends Component
     public ?Member $member = null;
 
     public string $name;
+    public string $phone_number;
 
     #[On(('update'))]
     public function prepare(string $id)
@@ -20,6 +21,7 @@ class Update extends Component
         $this->member = Member::findOrFail($id);
 
         $this->name = $this->member->name;
+        $this->phone_number = $this->member->phone_number;
 
         $this->dispatch('open-modal', modal: 'update user');
     }
@@ -40,6 +42,7 @@ class Update extends Component
     {
         return [
             'name' => ['required', 'string', Rule::unique('members', 'name')->ignore($this->member->id)->whereNull('deleted_at')],
+            'phone_number' => ['required', 'phone:ID', Rule::unique('members', 'phone_number')->ignore($this->member->id)->whereNull('deleted_at')],
         ];
     }
 
