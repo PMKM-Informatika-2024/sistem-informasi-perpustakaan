@@ -13,8 +13,11 @@
     <x-partial.modal name="update peminjaman">
       <livewire:modal.loan.update />
     </x-partial.modal>
-    <x-partial.modal name="redo">
-      <livewire:modal.loan.redo />
+    <x-partial.modal name="undo">
+      <livewire:modal.loan.undo />
+    </x-partial.modal>
+    <x-partial.modal name="missing">
+      <livewire:modal.loan.missing />
     </x-partial.modal>
   </div>
   <x-partial.toast type="success" />
