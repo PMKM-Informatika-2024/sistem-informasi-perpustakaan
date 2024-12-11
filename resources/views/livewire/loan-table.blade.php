@@ -49,41 +49,52 @@
         <table wire:loading.remove wire:target="keyword" class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-4 py-2">No</th>
-              <th scope="col" class="px-4 py-2">Peminjam</th>
-              <th scope="col" class="px-4 py-2">Dipinjam</th>
-              <th scope="col" class="px-4 py-2">Tanggal Pinjam</th>
-              <th scope="col" class="px-4 py-2">Status</th>
-              <th scope="col" class="px-4 py-2">Tanggal Balik</th>
-              <th scope="col" class="px-4 py-2">
+              <th scope="col" class="px-4 py-3">No</th>
+              <th scope="col" class="px-4 py-3">Peminjam</th>
+              <th scope="col" class="px-4 py-3">Dipinjam</th>
+              <th scope="col" class="px-4 py-3">Tanggal Pinjam</th>
+              <th scope="col" class="px-4 py-3">Lama Peminjaman</th>
+              <th scope="col" class="px-4 py-3">Status</th>
+              <th scope="col" class="px-4 py-3">Tanggal Balik</th>
+              <th scope="col" class="px-4 py-3">Denda</th>
+              <th scope="col" class="px-4 py-3">
                 <span class="sr-only">Actions</span>
               </th>
             </tr>
           </thead>
           <tbody>
             @foreach ($loans as $loan)
-              <tr class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $loop->iteration }}</td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $loan->member->name }}</td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
+              <tr wire:key="{{ $loan->id }}" class="border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ $loop->iteration }}</td>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ $loan->member->name }}</td>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   {{ $loan->book->code }} - {{ $loan->book->title }}
                 </td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   {{ $loan->created_at->translatedFormat('d F Y') }}
                 </td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
-                  {{ $loan->status ? 'Dikembalikan' : 'Dipinjam' }}
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  {{ $loan->due_date->diffForHumans($loan->borrow_date, ['syntax' => \Illuminate\Support\Carbon::DIFF_ABSOLUTE]) }}
                 </td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
-                  {{ $loan->status ? $loan->updated_at->translatedFormat('d F Y') : '-' }}
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  {{ Str::title($loan->status) }}
                 </td>
-                <td class="flex items-center justify-end px-4 py-2">
-                  @if (!$loan->status)
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  {{ $loan->status === 'selesai' ? $loan->updated_at->translatedFormat('d F Y') : '-' }}
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  {{ $loan->fine ? rupiah($loan->fine) : '-' }}
+                </td>
+                <td class="flex items-center justify-end px-4 py-3">
+                  @if ($loan->status === 'dipinjam')
                     <button type="button" x-on:click="$dispatch('update', { id: '{{ $loan->id }}' })"
                       class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                       <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
-                          d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z"
+                          d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
+                          clip-rule="evenodd" />
+                        <path fill-rule="evenodd"
+                          d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
                           clip-rule="evenodd" />
                       </svg>
                       <span class="sr-only">Edit</span>
@@ -95,13 +106,21 @@
                       </svg>
                       <span class="sr-only">Done</span>
                     </button>
-                  @else
-                    <button x-data x-on:click="$dispatch('redo', { id: '{{ $loan->id }}' })" type="button"
+                    <button x-data x-on:click="$dispatch('missing', { id: '{{ $loan->id }}' })" type="button"
+                      class="me-2 inline-flex items-center gap-1.5 rounded-full bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                      <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm5.757-1a1 1 0 1 0 0 2h8.486a1 1 0 1 0 0-2H7.757Z" clip-rule="evenodd" />
+                      </svg>
+                      <span class="sr-only">Hilang</span>
+                    </button>
+                  @endif
+                  @if ($loan->status !== 'dipinjam')
+                    <button x-data x-on:click="$dispatch('undo', { id: '{{ $loan->id }}' })" type="button"
                       class="me-2 inline-flex items-center gap-1.5 rounded-full bg-yellow-700 p-2.5 text-center text-sm font-medium text-white hover:bg-yellow-800 dark:bg-yellow-600 dark:hover:bg-yellow-700">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 text-gray-800 dark:text-white">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                       </svg>
-                      <span class="sr-only">Done</span>
+                      <span class="sr-only">Undo</span>
                     </button>
                   @endif
                   <button x-data x-on:click="$dispatch('delete', { id: '{{ $loan->id }}' })" type="button"
@@ -111,7 +130,7 @@
                         d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
                         clip-rule="evenodd" />
                     </svg>
-                    <span class="sr-only">Delete</span>
+                    <span class="sr-only">Hapus</span>
                   </button>
                 </td>
               </tr>
