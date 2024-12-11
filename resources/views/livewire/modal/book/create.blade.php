@@ -11,79 +11,79 @@
       <span class="sr-only">Close modal</span>
     </button>
   </div>
-  <form class="gap-4 p-4" wire:submit="create">
-    <div class="space-y-3">
+  <form class="gap-4 space-y-4 p-4" wire:submit="create">
+    <div>
+      <label for="category" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+      <select id="category" wire:model="category_id"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+        <option selected disabled value="">Pilih Kategori</option>
+        @foreach ($categories as $category)
+          <option wire:key="{{ $category->id }}" value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+      </select>
+      @error('category_id')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div class="flex gap-4">
       <div>
-        <label for="category" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-        <select id="category" wire:model="category_id"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-          <option selected disabled value="">Pilih Kategori</option>
-          @foreach ($categories as $category)
-            <option wire:key="{{ $category->id }}" value="{{ $category->id }}">{{ $category->name }}</option>
-          @endforeach
-        </select>
-        @error('book_id')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
-      <div class="flex gap-4">
-        <div>
-          <label for="code" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Nomor Induk</label>
-          <input type="text" wire:model="code" id="code"
-            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-            placeholder="741.5592" required>
-          @error('code')
-            <span class="text-sm text-red-400">{{ $message }}</span>
-          @enderror
-        </div>
-        <div>
-          <label for="stock" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Jumlah</label>
-          <input type="number" wire:model="stock" id="stock"
-            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-            placeholder="14022" required>
-          @error('stock')
-            <span class="text-sm text-red-400">{{ $message }}</span>
-          @enderror
-        </div>
-      </div>
-      <div>
-        <label for="author" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Pengarang</label>
-        <input type="text" wire:model="author" id="author"
+        <label for="code" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Nomor Induk</label>
+        <input type="text" wire:model="code" id="code"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="cth: si A, si B, si C" required>
-        @error('author')
+          placeholder="741.5592" required>
+        @error('code')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
       <div>
-        <label for="title" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Judul Buku</label>
-        <input type="text" wire:model="title" id="title"
+        <label for="stock" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Jumlah</label>
+        <input type="number" wire:model="stock" id="stock"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="Doraemon" required>
-        @error('title')
+          placeholder="14022" required>
+        @error('stock')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
-      <div class="flex gap-4">
-        <div>
-          <label for="publisher" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Penerbit</label>
-          <input type="text" wire:model="publisher" id="publisher"
-            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-            placeholder="Penerbit Erlangga" required>
-          @error('publisher')
-            <span class="text-sm text-red-400">{{ $message }}</span>
-          @enderror
-        </div>
-        <div>
-          <label for="year" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Tahun Terbit</label>
-          <input type="text" wire:model="year" id="year"
-            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-            placeholder="2021" required>
-          @error('year')
-            <span class="text-sm text-red-400">{{ $message }}</span>
-          @enderror
-        </div>
+    </div>
+    <div>
+      <label for="author" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Pengarang</label>
+      <input type="text" wire:model="author" id="author"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+        placeholder="si A|si B|si C|si D" required>
+      @error('author')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div>
+      <label for="title" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Judul Buku</label>
+      <input type="text" wire:model="title" id="title"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+        placeholder="Doraemon" required>
+      @error('title')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div class="flex gap-4">
+      <div>
+        <label for="publisher" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Penerbit</label>
+        <input type="text" wire:model="publisher" id="publisher"
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+          placeholder="Penerbit Erlangga" required>
+        @error('publisher')
+          <span class="text-sm text-red-400">{{ $message }}</span>
+        @enderror
       </div>
+      <div>
+        <label for="year" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Tahun Terbit</label>
+        <input type="text" wire:model="year" id="year"
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+          placeholder="2021" required>
+        @error('year')
+          <span class="text-sm text-red-400">{{ $message }}</span>
+        @enderror
+      </div>
+    </div>
+    <div class="flex gap-4">
       <div>
         <label for="source" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Sumber</label>
         <input type="text" wire:model="source" id="source"
@@ -94,17 +94,26 @@
         @enderror
       </div>
       <div>
-        <label for="description" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
-        <textarea wire:model="description" id="description"
+        <label for="price" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Harga</label>
+        <input type="text" wire:model="price" id="price"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="catatan" required></textarea>
-        @error('description')
+          placeholder="15000">
+        @error('price')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
     </div>
+    <div>
+      <label for="description" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
+      <input type="text" wire:model="description" id="description"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+        placeholder="catatan">
+      @error('description')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
     <div class="flex justify-end">
-      <button type="submit" class="mt-4 inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800">
+      <button type="submit" class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800">
         <svg wire:loading aria-hidden="true" class="size-4 -ms-1 me-2 inline animate-spin dark:fill-gray-600 dark:text-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
