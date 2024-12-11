@@ -9,8 +9,8 @@ class MemberFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->name(),
-            'phone_number' => fake()->unique()->e164PhoneNumber(),
+            'name' => fake()->name(),
+            'phone_number' => fake()->e164PhoneNumber(),
         ];
     }
 }

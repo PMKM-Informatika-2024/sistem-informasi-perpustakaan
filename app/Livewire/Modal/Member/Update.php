@@ -13,6 +13,7 @@ class Update extends Component
     public ?Member $member = null;
 
     public string $name;
+
     public string $phone_number;
 
     #[On(('update'))]
