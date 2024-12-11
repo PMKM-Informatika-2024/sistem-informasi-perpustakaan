@@ -2,32 +2,29 @@
 
 namespace App\Livewire\Modal\Loan;
 
-use App\Models\Loan;
 use Livewire\Component;
 use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Session;
+use App\Models\Loan;
 
-class Undo extends Component
+class Missing extends Component
 {
     public ?Loan $loan = null;
 
-    #[On('undo')]
+    #[On('missing')]
     public function prepare(string $id)
     {
         $this->loan = Loan::findOrFail($id);
 
-        $this->dispatch('open-modal', modal: 'undo');
+        $this->dispatch('open-modal', modal: 'missing');
     }
 
-    public function undo()
+    public function missing()
     {
         $this->loan->update([
-            'status' => 'dipinjam',
-            'return_date' => null,
-            'fine' => null
+            'status' => 'hilang',
+            'fine' => $this->loan->book->price
         ]);
 
-        Session::flash('success', 'Belum Diselesaikan');
         $this->dispatch('close-modal');
 
         return $this->redirectRoute('manage peminjaman');
@@ -35,6 +32,6 @@ class Undo extends Component
 
     public function render()
     {
-        return view('livewire.modal.loan.undo');
+        return view('livewire.modal.loan.missing');
     }
 }

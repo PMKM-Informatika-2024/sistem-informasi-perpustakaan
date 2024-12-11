@@ -5,6 +5,7 @@ namespace App\Livewire\Modal\Loan;
 use App\Models\Book;
 use App\Models\Loan;
 use App\Models\Member;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -20,6 +21,11 @@ class Update extends Component
     #[Validate(rule: 'required|exists:books,id')]
     public string $book_id = '';
 
+    #[Validate(rule: 'required')]
+    public string $duration = '';
+
+    private Carbon $due;
+
     #[On('update')]
     public function prepare(string $id)
     {
@@ -34,8 +40,12 @@ class Update extends Component
     public function update()
     {
         $data = $this->validate();
+        $this->getDueDate();
 
-        $this->loan->update($data);
+        $this->loan->update([
+            ...$data,
+            'due_date' => $this->due,
+        ]);
 
         Session::flash('success', 'Peminjaman berhasil diupdate');
         $this->dispatch('close-modal');
@@ -49,5 +59,38 @@ class Update extends Component
             'books' => Book::where('stock', '>', 0)->latest()->get(),
             'members' => Member::latest()->get(),
         ]);
+    }
+
+    private function getDueDate()
+    {
+        switch ($this->duration) {
+            case '1':
+                $this->due = Carbon::now()->addDays(1);
+                break;
+            case '3':
+                $this->due = Carbon::now()->addDays(3);
+                break;
+            case '5':
+                $this->due = Carbon::now()->addDays(5);
+                break;
+            case '7':
+                $this->due = Carbon::now()->addDays(7);
+                break;
+            case '30':
+                $this->due = Carbon::now()->addMonths(1);
+                break;
+            case '60':
+                $this->due = Carbon::now()->addMonths(2);
+                break;
+            case '90':
+                $this->due = Carbon::now()->addMonths(3);
+                break;
+            case '365':
+                $this->due = Carbon::now()->addYears(1);
+                break;
+            default:
+                $this->due = Carbon::now();
+                break;
+        }
     }
 }

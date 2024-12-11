@@ -27,6 +27,8 @@ class Update extends Component
 
     public string $source;
 
+    public string $price;
+
     public string $description;
 
     #[On('update')]
@@ -41,6 +43,7 @@ class Update extends Component
         $this->publisher = $this->book->publisher;
         $this->year = $this->book->year;
         $this->source = $this->book->source;
+        $this->price = $this->book->price;
         $this->description = $this->book->description;
 
         $this->dispatch('open-modal', modal: 'update book');
@@ -50,7 +53,10 @@ class Update extends Component
     {
         $data = $this->validate();
 
-        $this->book->update($data);
+        $this->book->update([
+            ...$data,
+            "price" => $data['price'] === "" ? 0 : $data['price']
+        ]);
 
         Session::flash('success', 'Buku berhasil diperbarui');
         $this->dispatch('close-modal');
@@ -63,12 +69,14 @@ class Update extends Component
         return [
             'category_id' => 'required|exists:categories,id',
             'code' => ['required', 'string', Rule::unique('books', 'code')->ignore($this->book->id)->whereNull('deleted_at')],
+            "stock" => 'required|numeric',
             'author' => 'required|string',
             'title' => 'required|string',
             'publisher' => 'required|string',
             'year' => 'required',
             'source' => 'required',
-            'description' => 'required',
+            'price' => 'nullable|numeric',
+            'description' => 'nullable',
         ];
     }
 
