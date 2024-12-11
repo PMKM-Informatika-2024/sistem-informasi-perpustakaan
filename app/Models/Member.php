@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Member extends Model
 {
-    use HasUuids, Prunable, SoftDeletes, HasFactory;
+    use HasFactory, HasUuids, Prunable, SoftDeletes;
 
     protected $guarded = ['id'];
 

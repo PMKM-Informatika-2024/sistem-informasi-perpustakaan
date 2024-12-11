@@ -3,8 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Book;
-use App\Models\Category;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\Attributes\Url;
 
 class BookTable extends Component
@@ -16,17 +16,17 @@ class BookTable extends Component
 
     public function render()
     {
-        if (request()->has("kategori")) {
+        if (request()->has('kategori')) {
             $this->category = Category::where('slug', request()->kategori)->first();
 
             return view('livewire.book-table')->with([
-                "categories" => Category::all(),
+                'categories' => Category::all(),
                 'books' => Book::where('title', 'LIKE', "%{$this->keyword}%")->where('category_id', $this->category?->id)->latest()->get(),
             ]);
         }
 
         return view('livewire.book-table')->with([
-            "categories" => Category::all(),
+            'categories' => Category::all(),
             'books' => Book::where('title', 'LIKE', "%{$this->keyword}%")->latest()->get(),
         ]);
     }

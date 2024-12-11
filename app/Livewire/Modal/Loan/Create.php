@@ -5,8 +5,8 @@ namespace App\Livewire\Modal\Loan;
 use App\Models\Book;
 use App\Models\Loan;
 use App\Models\Member;
-use Illuminate\Support\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Session;
 
@@ -32,7 +32,7 @@ class Create extends Component
             ...$data,
             'status' => 'dipinjam',
             'borrow_date' => Carbon::now(),
-            'due_date' => $this->due
+            'due_date' => $this->due,
         ]);
 
         $book = Book::findOrFail($this->book_id);

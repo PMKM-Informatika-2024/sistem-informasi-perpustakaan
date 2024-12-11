@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookFactory extends Factory
 {

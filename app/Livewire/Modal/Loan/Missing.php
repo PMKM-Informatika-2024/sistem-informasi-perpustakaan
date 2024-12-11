@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Modal\Loan;
 
+use App\Models\Loan;
 use Livewire\Component;
 use Livewire\Attributes\On;
-use App\Models\Loan;
 
 class Missing extends Component
 {
@@ -22,7 +22,7 @@ class Missing extends Component
     {
         $this->loan->update([
             'status' => 'hilang',
-            'fine' => $this->loan->book->price
+            'fine' => $this->loan->book->price,
         ]);
 
         $this->dispatch('close-modal');

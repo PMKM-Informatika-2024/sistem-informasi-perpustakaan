@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('book_id');
             $table->foreignUuid('member_id');
-            $table->string("status");
+            $table->string('status');
             $table->date('borrow_date');
             $table->date('due_date');
             $table->date('return_date')->nullable();

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Carbon;
 
-if (!function_exists('rupiah')) {
+if (! function_exists('rupiah')) {
     function rupiah(int $value): string
     {
         $formatter = NumberFormatter::create('id_ID', NumberFormatter::CURRENCY);
@@ -12,7 +12,7 @@ if (!function_exists('rupiah')) {
     }
 }
 
-if (!function_exists('calculateFine')) {
+if (! function_exists('calculateFine')) {
     function calculateFine(Carbon $dueDate, Carbon $returnDate): int
     {
         if ($returnDate->greaterThan($dueDate)) {

@@ -55,7 +55,7 @@ class Update extends Component
 
         $this->book->update([
             ...$data,
-            "price" => $data['price'] === "" ? 0 : $data['price']
+            'price' => $data['price'] === '' ? 0 : $data['price'],
         ]);
 
         Session::flash('success', 'Buku berhasil diperbarui');
@@ -69,7 +69,7 @@ class Update extends Component
         return [
             'category_id' => 'required|exists:categories,id',
             'code' => ['required', 'string', Rule::unique('books', 'code')->ignore($this->book->id)->whereNull('deleted_at')],
-            "stock" => 'required|numeric',
+            'stock' => 'required|numeric',
             'author' => 'required|string',
             'title' => 'required|string',
             'publisher' => 'required|string',

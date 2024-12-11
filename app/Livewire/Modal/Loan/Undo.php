@@ -24,7 +24,7 @@ class Undo extends Component
         $this->loan->update([
             'status' => 'dipinjam',
             'return_date' => null,
-            'fine' => null
+            'fine' => null,
         ]);
 
         Session::flash('success', 'Belum Diselesaikan');

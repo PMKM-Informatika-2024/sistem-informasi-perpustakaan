@@ -41,7 +41,7 @@ class Create extends Component
             'publisher' => 'required',
             'year' => 'required',
             'source' => 'required',
-            'price' => "nullable|numeric",
+            'price' => 'nullable|numeric',
             'description' => 'nullable',
         ];
     }
@@ -53,7 +53,7 @@ class Create extends Component
         Book::create([
             ...$data,
             'initial' => $data['stock'],
-            "price" => $data['price'] === "" ? null : $data['price'],
+            'price' => $data['price'] === '' ? null : $data['price'],
         ]);
 
         Session::flash('success', 'Buku berhasil ditambahkan');

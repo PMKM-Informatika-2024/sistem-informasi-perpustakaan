@@ -3,9 +3,9 @@
 namespace App\Livewire\Modal\Loan;
 
 use App\Models\Loan;
-use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class Done extends Component
@@ -25,7 +25,7 @@ class Done extends Component
         $this->loan->update([
             'status' => 'selesai',
             'return_date' => Carbon::now(),
-            'fine' => calculateFine($this->loan->due_date, Carbon::now())
+            'fine' => calculateFine($this->loan->due_date, Carbon::now()),
         ]);
 
         $book = $this->loan->book;
