@@ -12,7 +12,7 @@ class Category extends Model
 {
     use HasUuids, Prunable, Sluggable, SoftDeletes;
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'slug'];
 
     public $incrementing = false;
 

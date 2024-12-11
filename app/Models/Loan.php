@@ -24,4 +24,13 @@ class Loan extends Model
     {
         return $this->belongsTo(Member::class)->withTrashed();
     }
+
+    protected function casts()
+    {
+        return [
+            'borrow_date' => 'datetime',
+            'due_date' => 'datetime',
+            'return_date' => 'datetime',
+        ];
+    }
 }
