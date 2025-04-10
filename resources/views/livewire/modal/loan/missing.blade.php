@@ -10,8 +10,8 @@
     <svg class="mx-auto mb-4 h-12 w-12 text-gray-400 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
     </svg>
-    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Tandai belum dikembalikan?</h3>
-    <button type="submit" wire:click="redo" type="button" class="inline-flex items-center rounded-lg bg-red-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800">
+    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Tandai sebagai Hilang?</h3>
+    <button type="submit" wire:click="missing" type="button" class="inline-flex items-center rounded-lg bg-red-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800">
       Yakin
     </button>
     <button x-on:click="open = false" type="button"

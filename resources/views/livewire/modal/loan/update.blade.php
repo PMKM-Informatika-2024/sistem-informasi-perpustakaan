@@ -11,34 +11,50 @@
       <span class="sr-only">Close modal</span>
     </button>
   </div>
-  <form class="gap-4 p-4 md:p-5" wire:submit="update">
-    <div class="space-y-4">
-      <div>
-        <label for="member" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Member</label>
-        <select id="member" wire:model="member_id"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-          <option selected disabled value="">Pilih Member</option>
-          @foreach ($members as $member)
-            <option wire:key="{{ $member->id }}" value="{{ $member->id }}">{{ Str::ucfirst($member->name) }}</option>
-          @endforeach
-        </select>
-        @error('member_id')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
-      <div>
-        <label for="book" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Buku</label>
-        <select id="book" wire:model="book_id"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-          <option selected disabled value="">Pilih Buku</option>
-          @foreach ($books as $book)
-            <option wire:key="{{ $book->id }}" value="{{ $book->id }}">{{ $book->code }} - {{ Str::ucfirst($book->title) }}</option>
-          @endforeach
-        </select>
-        @error('book_id')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
+  <form class="gap-4 space-y-4 p-4" wire:submit="update">
+    <div>
+      <label for="member_update" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Member</label>
+      <select id="member_update" wire:model="member_id"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+        <option selected disabled value="">Pilih Member</option>
+        @foreach ($members as $member)
+          <option wire:key="{{ $member->id }}" value="{{ $member->id }}">{{ Str::ucfirst($member->name) }}</option>
+        @endforeach
+      </select>
+      @error('user_id')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div>
+      <label for="book_update" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Buku</label>
+      <select id="book_update" wire:model="book_id"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+        <option selected disabled value="">Pilih Buku</option>
+        @foreach ($books as $book)
+          <option wire:key="{{ $book->id }}" value="{{ $book->id }}">{{ $book->code }} - {{ Str::ucfirst($book->title) }}</option>
+        @endforeach
+      </select>
+      @error('book_id')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div>
+      <label for="duration_update" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Durasi Peminjaman</label>
+      <select id="duration_update" wire:model="duration"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+        <option value="" selected disabled>Durasi Peminjaman</option>
+        <option value="1">1 Hari</option>
+        <option value="3">3 Hari</option>
+        <option value="5">5 Hari</option>
+        <option value="7">1 Minggu</option>
+        <option value="30">1 Bulan</option>
+        <option value="60">2 Bulan</option>
+        <option value="90">3 Bulan</option>
+        <option value="365">1 Tahun</option>
+      </select>
+      @error('duration')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
     </div>
     <div class="flex justify-end">
       <button type="submit" class="mt-4 inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700">

@@ -59,9 +59,10 @@
         <table wire:loading.remove wire:target="keyword" class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th class="px-4 py-2">No</th>
-              <th class="px-4 py-2">Nama</th>
-              <th class="px-4 py-2">
+              <th class="px-4 py-3">No</th>
+              <th class="px-4 py-3">Nama</th>
+              <th class="px-4 py-3">No. HP</th>
+              <th class="px-4 py-3">
                 <span class="sr-only">Actions</span>
               </th>
             </tr>
@@ -69,8 +70,9 @@
           <tbody>
             @foreach ($members as $member)
               <tr wire:key="{{ $member->id }}" class="border-b last:border-b-0 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
-                <th scope="row" class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $loop->iteration }}</th>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $member->name }}</td>
+                <th scope="row" class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ $loop->iteration }}</th>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ $member->name }}</td>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ $member->phone_number }}</td>
                 <td class="flex items-center justify-end px-4 py-3">
                   <button type="button" x-on:click="$dispatch('update', { id: '{{ $member->id }}' })"
                     class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

@@ -11,21 +11,21 @@
       <span class="sr-only">Close modal</span>
     </button>
   </div>
-  <form class="gap-4 p-4 md:p-5" wire:submit="update">
-    <div class="space-y-4">
-      <div>
-        <label for="category_id" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-        <select id="category_id" wire:model="category_id"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-          <option selected disabled value="">Pilih Kategori</option>
-          @foreach ($categories as $category)
-            <option wire:key="{{ $category->id }}" value="{{ $category->id }}">{{ $category->name }}</option>
-          @endforeach
-        </select>
-        @error('category_id')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
+  <form class="gap-4 space-y-4 p-4" wire:submit="update">
+    <div>
+      <label for="category" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+      <select id="category" wire:model="category_id"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+        <option selected disabled value="">Pilih Kategori</option>
+        @foreach ($categories as $category)
+          <option wire:key="{{ $category->id }}" value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+      </select>
+      @error('category_id')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div class="flex gap-4">
       <div>
         <label for="code" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Nomor Induk</label>
         <input type="text" wire:model="code" id="code"
@@ -35,62 +35,73 @@
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
+    </div>
+    <div>
+      <label for="author" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Pengarang</label>
+      <input type="text" wire:model="author" id="author"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+        placeholder="si A|si B|si C|si D" required>
+      @error('author')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div>
+      <label for="title" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Judul Buku</label>
+      <input type="text" wire:model="title" id="title"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+        placeholder="Doraemon" required>
+      @error('title')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div class="flex gap-4">
       <div>
-        <label for="author" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Pengarang</label>
-        <input type="text" wire:model="author" id="author"
+        <label for="publisher" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Penerbit</label>
+        <input type="text" wire:model="publisher" id="publisher"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="741.5592" required>
-        @error('author')
+          placeholder="Penerbit Erlangga" required>
+        @error('publisher')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
       <div>
-        <label for="title" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Judul Buku</label>
-        <input type="text" wire:model="title" id="title"
+        <label for="year" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Tahun Terbit</label>
+        <input type="text" wire:model="year" id="year"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="Doraemon" required>
-        @error('title')
+          placeholder="2021" required>
+        @error('year')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
-      <div class="flex gap-4">
-        <div>
-          <label for="publisher" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Penerbit</label>
-          <input type="text" wire:model="publisher" id="publisher"
-            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-            placeholder="Doraemon" required>
-          @error('publisher')
-            <span class="text-sm text-red-400">{{ $message }}</span>
-          @enderror
-        </div>
-        <div>
-          <label for="year" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Tahun Terbit</label>
-          <input type="text" wire:model="year" id="year"
-            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-            placeholder="Doraemon" required>
-          @error('year')
-            <span class="text-sm text-red-400">{{ $message }}</span>
-          @enderror
-        </div>
-      </div>
+    </div>
+    <div class="flex gap-4">
       <div>
         <label for="source" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Sumber</label>
         <input type="text" wire:model="source" id="source"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="Doraemon" required>
+          placeholder="Dana BOS" required>
         @error('source')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
       <div>
-        <label for="description" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
-        <textarea wire:model="description" id="description"
+        <label for="price" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Harga</label>
+        <input type="text" wire:model="price" id="price"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="Doraemon" required></textarea>
-        @error('description')
+          placeholder="catatan">
+        @error('price')
           <span class="text-sm text-red-400">{{ $message }}</span>
         @enderror
       </div>
+    </div>
+    <div>
+      <label for="description" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
+      <input type="text" wire:model="description" id="description"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+        placeholder="catatan">
+      @error('description')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
     </div>
     <div class="flex justify-end">
       <button type="submit" class="mt-4 inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700">

@@ -26,6 +26,8 @@ class Create extends Component
 
     public string $source;
 
+    public string $price;
+
     public string $description;
 
     public function rules()
@@ -39,6 +41,7 @@ class Create extends Component
             'publisher' => 'required',
             'year' => 'required',
             'source' => 'required',
+            'price' => 'nullable|numeric',
             'description' => 'nullable',
         ];
     }
@@ -47,7 +50,11 @@ class Create extends Component
     {
         $data = $this->validate();
 
-        Book::create([...$data, 'initial' => $data['stock']]);
+        Book::create([
+            ...$data,
+            'initial' => $data['stock'],
+            'price' => $data['price'] === '' ? null : $data['price'],
+        ]);
 
         Session::flash('success', 'Buku berhasil ditambahkan');
         $this->dispatch('close-modal');

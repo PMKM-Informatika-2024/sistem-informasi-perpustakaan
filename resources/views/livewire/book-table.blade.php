@@ -34,6 +34,31 @@
           </svg>
           <span>Hapus Semua</span>
         </button>
+        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" data-dropdown-placement="bottom-end"
+          class="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:w-auto"
+          type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="mr-2 h-4 w-4 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
+          </svg>
+          Kategori
+          <svg class="-mr-1 ml-1.5 h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+          </svg>
+        </button>
+        <div id="filterDropdown" class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-gray-700">
+          <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Kategori</h6>
+          <form>
+            <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+              @foreach ($categories as $category)
+                <li class="flex items-center">
+                  <input id="{{ $category->id }}" onchange="this.form.submit()" type="radio" name="kategori" value="{{ $category->slug }}"
+                    class="size-4 rounded-full border-gray-300 bg-gray-100 text-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600">
+                  <label for="{{ $category->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">{{ $category->name }} ({{ $category->books->count() }})</label>
+                </li>
+              @endforeach
+            </ul>
+          </form>
+        </div>
       </div>
     </div>
     <div class="overflow-x-auto">
@@ -56,20 +81,21 @@
           <p class="-mt-1.5 text-4xl/none font-semibold text-white">Tidak Ada Buku</p>
         </div>
       @else
-        <table wire:loading.remove wire:target="keyword" class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+        <table wire:loading.remove wire:target="keyword" class="h-0.5 w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-4 py-2">Tanggal Masuk</th>
-              <th scope="col" class="px-4 py-2">Nomor Induk</th>
-              <th scope="col" class="px-4 py-2">Jumlah</th>
-              <th scope="col" class="px-4 py-2">Pengarang</th>
-              <th scope="col" class="px-4 py-2">Judul</th>
-              <th scope="col" class="px-4 py-2">Kategori</th>
-              <th scope="col" class="px-4 py-2">Penerbit</th>
-              <th scope="col" class="px-4 py-2">Tahun Terbit</th>
-              <th scope="col" class="px-4 py-2">Sumber</th>
-              <th scope="col" class="px-4 py-2">Keterangan</th>
-              <th scope="col" class="px-4 py-2">
+              <th scope="col" class="px-4 py-3">Tanggal Masuk</th>
+              <th scope="col" class="px-4 py-3">Nomor Induk</th>
+              <th scope="col" class="px-4 py-3">Jumlah</th>
+              <th scope="col" class="px-4 py-3">Pengarang</th>
+              <th scope="col" class="px-4 py-3">Judul</th>
+              <th scope="col" class="px-4 py-3">Kategori</th>
+              <th scope="col" class="px-4 py-3">Penerbit</th>
+              <th scope="col" class="px-4 py-3">Tahun Terbit</th>
+              <th scope="col" class="px-4 py-3">Sumber</th>
+              <th scope="col" class="px-4 py-3">Harga</th>
+              <th scope="col" class="px-4 py-3">Keterangan</th>
+              <th scope="col" class="px-4 py-3">
                 <span class="sr-only">Actions</span>
               </th>
             </tr>
@@ -77,46 +103,52 @@
           <tbody>
             @foreach ($books as $book)
               <tr wire:key="{{ $book->id }}" class="border-b last:border-b-0 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700">
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->created_at->translatedFormat('F Y') }}</td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->code }}</td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">{{ $book->stock }}/{{ $book->initial }}</td>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ $book->created_at->translatedFormat('F Y') }}</td>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ $book->code }}</td>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ $book->stock }}/{{ $book->initial }}</td>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   <ul class="list-disc">
-                    @foreach (Str::of($book->author)->explode(', ') as $author)
+                    @foreach (Str::of($book->author)->explode('|') as $author)
                       <li>{{ $author }}</li>
                     @endforeach
                   </ul>
                 </td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   {{ $book->title }}
                 </td>
-                <td class="=py-2 px-4 font-medium text-gray-900 dark:text-white">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   {{ $book->category->name }}
                 </td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   {{ $book->publisher }}
                 </td>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   {{ $book->year }}
                 </td>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   {{ $book->source }}
                 </td>
-                <td class="px-4 py-2 font-medium text-gray-900 dark:text-white">
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  {{ rupiah($book->price) }}
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
                   {{ $book->description }}
                 </td>
-                <td class="flex flex-col gap-2.5 px-4 py-2">
-                  <button x-on:click="$dispatch('update', { id: '{{ $book->id }}' })" type="button"
-                    class="mx-auto inline-flex items-center gap-1.5 rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <td class="flex h-full items-center justify-end px-4 py-3">
+                  <button type="button" x-on:click="$dispatch('update', { id: '{{ $book->id }}' })"
+                    class="me-2 inline-flex items-center rounded-full bg-blue-700 p-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"
-                        d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z"
+                        d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
+                        clip-rule="evenodd" />
+                      <path fill-rule="evenodd"
+                        d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
                         clip-rule="evenodd" />
                     </svg>
                     <span class="sr-only">Edit</span>
                   </button>
                   <button x-on:click="$dispatch('delete', { id: '{{ $book->id }}' })" type="button"
-                    class="mx-auto inline-flex items-center gap-1.5 rounded-full bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    class="me-2 inline-flex items-center rounded-full bg-red-700 p-2.5 text-center text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                     <svg class="size-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd"
                         d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"

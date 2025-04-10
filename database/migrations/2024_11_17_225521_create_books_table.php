@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('publisher');
             $table->string('year');
             $table->string('source');
+            $table->integer('price')->nullable();
             $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();

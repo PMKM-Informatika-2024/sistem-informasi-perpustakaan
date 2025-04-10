@@ -11,20 +11,27 @@
       <span class="sr-only">Close modal</span>
     </button>
   </div>
-  <form class="gap-4 p-4 md:p-5" wire:submit="create">
-    <div class="space-y-4">
-      <div>
-        <label for="name" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
-        <input type="text" wire:model="name" id="name"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-          placeholder="Udin Petot" required>
-        @error('name')
-          <span class="text-sm text-red-400">{{ $message }}</span>
-        @enderror
-      </div>
+  <form class="gap-4 space-y-4 p-4 md:p-5" wire:submit="create">
+    <div>
+      <label for="name" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
+      <input type="text" wire:model="name" id="name"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+        placeholder="Udin Petot" required>
+      @error('name')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
+    </div>
+    <div>
+      <label for="phone_number" class="mb-1 block text-sm font-medium text-gray-900 dark:text-white">No. HP</label>
+      <input type="number" wire:model="phone_number" id="phone_number"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:read-only:bg-gray-600 dark:read-only:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+        placeholder="08xxxxxxxxxx" required>
+      @error('phone_number')
+        <span class="text-sm text-red-400">{{ $message }}</span>
+      @enderror
     </div>
     <div class="flex justify-end">
-      <button type="submit" class="mt-4 inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800">
+      <button type="submit" class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800">
         <svg wire:loading aria-hidden="true" class="size-4 -ms-1 me-2 inline animate-spin dark:fill-gray-600 dark:text-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
