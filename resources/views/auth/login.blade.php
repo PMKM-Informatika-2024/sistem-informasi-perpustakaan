@@ -3,7 +3,7 @@
 @section('content')
   <div class="h-dvh lg:flex">
     <div class="h-56 w-full lg:h-full lg:w-2/5">
-      <img src="{{ $image ? asset('storage/' . $image) : asset('image/login2.webp') }}" alt="Login Image" class="size-full object-cover object-center">
+      <img src="{{ $image ? asset('storage/' . $image) : asset('image/perpus.jpg') }}" alt="Login Image" class="size-full object-cover object-center">
     </div>
     <div class="grid w-full place-items-center lg:w-3/5">
       <div class="w-full rounded-lg bg-white shadow dark:border dark:border-gray-700 dark:bg-gray-950 lg:mt-0 lg:max-w-xl lg:p-0">
